@@ -23,8 +23,8 @@
 
     <action-mappings>
         <action input="/login.jsp" name="LoginForm" path="/Login" scope="session" type="com.capgemini.eLibrary.actions.LoginAction">
-            <forward name="success" path="/success.jsp" />
-            <forward name="failure" path="/failure.jsp" />
+            <forward name="success" path="/admin.jsp" />
+            <forward name="failure" path="/login.jsp" />
         </action>
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
     </action-mappings>
