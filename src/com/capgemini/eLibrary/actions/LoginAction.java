@@ -36,6 +36,7 @@ public class LoginAction extends org.apache.struts.action.Action {
         if(userName.equals(password) )
         {
         	loginStatus = "success";
+        	System.out.println(loginStatus);
             return mapping.findForward(loginStatus);
         }
         else

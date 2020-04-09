@@ -11,6 +11,15 @@
             <form-property name="userName" type="java.lang.String" />
             <form-property name="password" type="java.lang.String" />
         </form-bean>
+        <form-bean name="CreateStaffForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="name" type="java.lang.String" />
+            <form-property name="username" type="java.lang.String" />
+            <form-property name="password" type="java.lang.String" />
+            <form-property name="rePassword" type="java.lang.String" />
+            <form-property name="address" type="java.lang.String" />
+        	<form-property name="phoneNo" type="java.lang.String" />
+            <form-property name="designation" type="java.lang.String" />
+        </form-bean>
     </form-beans>
     
     <global-exceptions>
@@ -26,8 +35,13 @@
             <forward name="success" path="/admin.jsp" />
             <forward name="failure" path="/login.jsp" />
         </action>
-        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+        <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
+            <forward name="registered" path="/registered.jsp" />
+        </action>
     </action-mappings>
+    
+    
+        
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
 
