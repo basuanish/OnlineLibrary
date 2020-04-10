@@ -9,5 +9,5 @@ public interface StaffDAO {
 	boolean existsByPhoneNo(String phoneNo) throws SQLException;
 	String addStaffRow(StaffMember staffMember) throws SQLException;
 	StaffMember findById(String staffID) throws SQLException;
-	
+	StaffMember deleteById(String staffID) throws SQLException;
 }

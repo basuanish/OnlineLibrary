@@ -9,7 +9,6 @@ import com.capgemini.eLibrary.exceptions.BackendException;
 import com.capgemini.eLibrary.exceptions.StaffCreationException;
 import com.capgemini.eLibrary.exceptions.StaffDeletionException;
 import com.capgemini.eLibrary.exceptions.StaffFetchingException;
-import com.capgemini.eLibrary.exceptions.StaffUpdationException;
 
 public class StaffServiceImpl implements StaffService {
 
@@ -67,19 +66,18 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public String updateStaff(StaffMember staffMember) throws StaffUpdationException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String deleteStaff(StaffMember staffMemberWithIdOnly) throws StaffDeletionException {
-		// TODO Auto-generated method stub
-		return null;
+		StaffDAO staffDAO = new StaffDAOImpl();
+		String staffID = staffMemberWithIdOnly.getStaffID();
+		StaffMember staffMember = null;
+		try {
+			staffMember = staffDAO.deleteById(staffID);
+			if(staffMember==null)
+				throw new StaffDeletionException("The typed ID does not exist!!!");
+		}catch(SQLException exception) {
+			throw new StaffDeletionException(exception.getMessage());
+		}
+		return "Staff Member with typed ID has been deleted";
 	}
 	
-	
-
-	
-
 }

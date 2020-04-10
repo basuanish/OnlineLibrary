@@ -15,7 +15,6 @@ public class StaffDAOImpl implements StaffDAO{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		boolean staffExists = false;
-
 		try {
 			connection = DBUtilities.getConnection();
 			String query = "select * from STAFF_MEMBERS where USER_NAME=?";
@@ -121,6 +120,7 @@ public class StaffDAOImpl implements StaffDAO{
 			connection = DBUtilities.getConnection();
 			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
 			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, staffID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.getFetchSize()==0)
 				return staffMember;
@@ -141,5 +141,51 @@ public class StaffDAOImpl implements StaffDAO{
 			DBUtilities.closeConnection(connection);
 		}
 		return staffMember;
+	}
+
+	@Override
+	public StaffMember deleteById(String staffID) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null, preparedStatement1 = null;
+		StaffMember staffMemberDeleted=null;
+		/*
+		 * 	STAFF_ID VARCHAR(10),
+		    STAFF_NAME VARCHAR(30),
+		    USER_NAME VARCHAR(20) UNIQUE NOT NULL,
+		    PASS VARCHAR(20) NOT NULL,
+		    PHONENO VARCHAR(10) UNIQUE NOT NULL,
+		    ADDRESS VARCHAR(1000),
+		    DESIGNATION VARCHAR(20) NOT NULL
+		 */
+		try {
+			connection = DBUtilities.getConnection();
+			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, staffID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.getFetchSize()==0)
+				return staffMemberDeleted;
+			
+			staffMemberDeleted=new StaffMember();
+			if (resultSet.next()) {
+				staffMemberDeleted.setStaffID(resultSet.getString(1));
+				staffMemberDeleted.setName(resultSet.getString(2));
+				staffMemberDeleted.setUsername(resultSet.getString(3));
+				staffMemberDeleted.setPhoneNo(resultSet.getString(5));
+				staffMemberDeleted.setAddress(resultSet.getString(6));
+				staffMemberDeleted.setDesignation(resultSet.getString(7));
+				query = "delete from STAFF_MEMBERS where STAFF_ID=?";
+				preparedStatement1 = connection.prepareStatement(query);
+				preparedStatement1.setString(1, staffID);
+				preparedStatement1.executeUpdate();
+			}
+		} catch (SQLException exception){
+			throw (exception);
+		} finally {
+			DBUtilities.closePreparedStatement(preparedStatement);
+			DBUtilities.closePreparedStatement(preparedStatement1);
+			DBUtilities.closeConnection(connection);
+		}
+		return staffMemberDeleted;
 	}
 }
