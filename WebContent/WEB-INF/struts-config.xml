@@ -7,18 +7,7 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="LoginForm" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="userName" type="java.lang.String" />
-            <form-property name="password" type="java.lang.String" />
-        </form-bean>
-        <form-bean name="CreateStaffForm" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="name" type="java.lang.String" />
-            <form-property name="username" type="java.lang.String" />
-            <form-property name="password" type="java.lang.String" />
-            <form-property name="rePassword" type="java.lang.String" />
-            <form-property name="address" type="java.lang.String" />
-        	<form-property name="phoneNo" type="java.lang.String" />
-            <form-property name="designation" type="java.lang.String" />
+        <form-bean name="LoginForm" type="com.capgemini.eLibrary.forms.LoginForm">
         </form-bean>
     </form-beans>
     
@@ -33,19 +22,14 @@
     <action-mappings>
         <action input="/login.jsp" name="LoginForm" path="/Login" scope="session" type="com.capgemini.eLibrary.actions.LoginAction">
             <forward name="success" path="/admin.jsp" />
-            <forward name="failure" path="/login.jsp" />
+            <forward name="failure" path="/failure.jsp" />
         </action>
-        <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
-            <forward name="registered" path="/registered.jsp" />
-        </action>
+        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
     </action-mappings>
-    
-    
-        
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
 
-    <message-resources parameter="com/tutorials4u/ApplicationResource"/>
+    <message-resources parameter="com.capgemini.eLibrary.ApplicationResource"/>
     
     <!-- ========================= Tiles plugin ===============================-->
     <!--

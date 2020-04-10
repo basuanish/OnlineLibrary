@@ -1,4 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -11,10 +12,10 @@
         <title>Failure Page</title>
     </head>
     <body>
-    <%@ include file="header.jsp"%>
+     
         <div style="color:red">
             <h1>Please check your username and Password</h1>
-            <jsp:forward page="admin.jsp"></jsp:forward> 
+            <%@ include file="login.jsp"%> 
         </div>
     </body>
 </html>

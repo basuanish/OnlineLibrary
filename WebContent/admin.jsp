@@ -15,7 +15,7 @@
 		<div id="content-box">
 		<table width="500" height="300" border="0" cellspacing="20" cellpadding="0" align="center">
 		<tr><th>Login Success. Welcome <bean:write name="LoginForm" property="userName"></bean:write></th></tr>
-			<tr><td><a href="createStaff.jsp"> Create new staff </a></td></tr>
+			<tr><td><a href="newstaff.jsp"> Create new staff </a></td></tr>
 			<tr><td><a href="showstaff.jsp"> Show staff deatils </a></td></tr>
 			<tr><td><a href="bookdetails.jsp"> Show Book deatils </a></td></tr>
 			
