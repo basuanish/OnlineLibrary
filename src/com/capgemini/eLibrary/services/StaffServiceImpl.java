@@ -80,4 +80,43 @@ public class StaffServiceImpl implements StaffService {
 		return "Staff Member with typed ID has been deleted";
 	}
 	
+	public static void main(String[] args) throws BackendException, StaffCreationException, StaffFetchingException {
+		StaffService staffService = new StaffServiceImpl();
+		StaffMember staffMember=new StaffMember();
+		staffMember.setName("Amar Singh");
+		staffMember.setUsername("amar");
+		staffMember.setPassword("abcd");
+		staffMember.setPhoneNo("9123412345");
+		staffMember.setAddress("Kolkata");
+		staffMember.setDesignation("Librarian");
+		staffService.createStaff(staffMember);
+		
+		staffMember=new StaffMember();
+		staffMember.setStaffID("S1");
+		System.out.println(staffService.fetchStaff(staffMember));
+		
+		staffMember=new StaffMember();
+		staffMember.setStaffID("S2");
+		System.out.println(staffService.fetchStaff(staffMember));
+		
+		staffMember=new StaffMember();
+		staffMember.setStaffID("S1");
+		staffService.checkUsernameForStaff(staffMember);
+		
+		staffMember=new StaffMember();
+		staffMember.setStaffID("S2");
+		staffService.checkUsernameForStaff(staffMember);
+		
+		staffMember=new StaffMember();
+		staffMember.setPhoneNo("9123412345");
+		staffService.checkPhoneNoForStaff(staffMember);
+		
+		staffMember=new StaffMember();
+		staffMember.setPhoneNo("9123412225");
+		staffService.checkPhoneNoForStaff(staffMember);
+		
+		staffMember=new StaffMember();
+		staffMember.setPhoneNo("9123412345");
+		staffService.checkPhoneNoForStaff(staffMember);
+	}
 }
