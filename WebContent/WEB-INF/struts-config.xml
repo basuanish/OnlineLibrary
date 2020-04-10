@@ -6,84 +6,95 @@
 
 
 <struts-config>
-    <form-beans>
-        <form-bean name="LoginForm" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="userName" type="java.lang.String" />
-            <form-property name="password" type="java.lang.String" />
-        </form-bean>
-        <form-bean name="CreateStaffForm" type="org.apache.struts.action.DynaActionForm">
-            <form-property name="name" type="java.lang.String" />
-            <form-property name="username" type="java.lang.String" />
-            <form-property name="password" type="java.lang.String" />
-            <form-property name="rePassword" type="java.lang.String" />
-            <form-property name="address" type="java.lang.String" />
-        	<form-property name="phoneNo" type="java.lang.String" />
-            <form-property name="designation" type="java.lang.String" />
-        </form-bean>
-    </form-beans>
-    
-    <global-exceptions>
-    
-    </global-exceptions>
+	<data-sources>
+		<data-source
+			type="org.apache.commons.dbcp.BasicDataSource">
+			<set-property property="driverClassName"
+				value="com.mysql.jdbc.Driver" />
+			<set-property property="url"
+				value="jdbc:mysql://localhost:3306/LibraryDB" />
+			<set-property property="username" value="root" />
+			<set-property property="password" value="pass" />
+		</data-source>
+	</data-sources>
+	<form-beans>
+		<form-bean name="LoginForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="userName" type="java.lang.String" />
+			<form-property name="password" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="CreateStaffForm"
+			type="org.apache.struts.action.DynaActionForm">
+			<form-property name="name" type="java.lang.String" />
+			<form-property name="username" type="java.lang.String" />
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="rePassword"
+				type="java.lang.String" />
+			<form-property name="address" type="java.lang.String" />
+			<form-property name="phoneNo" type="java.lang.String" />
+			<form-property name="designation"
+				type="java.lang.String" />
+		</form-bean>
+	</form-beans>
 
-    <global-forwards>
-        <forward name="welcome"  path="/Welcome.do"/>
-    </global-forwards>
+	<global-exceptions>
 
-    <action-mappings>
-        <action input="/login.jsp" name="LoginForm" path="/Login" scope="session" type="com.capgemini.eLibrary.actions.LoginAction">
-            <forward name="success" path="/admin.jsp" />
-            <forward name="failure" path="/login.jsp" />
-        </action>
-        <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
-            <forward name="registered" path="/registered.jsp" />
-        </action>
-    </action-mappings>
-    
-    
-        
-    
-    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+	</global-exceptions>
 
-    <message-resources parameter="com/tutorials4u/ApplicationResource"/>
-    
-    <!-- ========================= Tiles plugin ===============================-->
-    <!--
-    This plugin initialize Tiles definition factory. This later can takes some
-    parameters explained here after. The plugin first read parameters from
-    web.xml, thenoverload them with parameters defined here. All parameters
-    are optional.
-    The plugin should be declared in each struts-config file.
-    - definitions-config: (optional)
-    Specify configuration file names. There can be several comma
-    separated file names (default: ?? )
-    - moduleAware: (optional - struts1.1)
-    Specify if the Tiles definition factory is module aware. If true
-    (default), there will be one factory for each Struts module.
-    If false, there will be one common factory for all module. In this
-    later case, it is still needed to declare one plugin per module.
-    The factory will be initialized with parameters found in the first
-    initialized plugin (generally the one associated with the default
-    module).
-    true : One factory per module. (default)
-    false : one single shared factory for all modules
-    - definitions-parser-validate: (optional)
-    Specify if xml parser should validate the Tiles configuration file.
-    true : validate. DTD should be specified in file header (default)
-    false : no validation
+	<global-forwards>
+		<forward name="welcome" path="/Welcome.do" />
+	</global-forwards>
 
-    Paths found in Tiles definitions are relative to the main context.
-    -->
-    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
-        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
-        <set-property property="moduleAware" value="true" />
-    </plug-in>
-    
-    <!-- ========================= Validator plugin ================================= -->
-    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
-        <set-property
-            property="pathnames"
-            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
-    </plug-in>
-  
+	<action-mappings>
+		<action input="/login.jsp" name="LoginForm" path="/Login"
+			scope="session" type="com.capgemini.eLibrary.actions.LoginAction">
+			<forward name="success" path="/admin.jsp" />
+			<forward name="failure" path="/login.jsp" />
+		</action>
+		<action input="/createStaff.jsp" name="CreateStaffForm"
+			path="/CreateStaff" scope="session"
+			type="com.capgemini.eLibrary.actions.CreateStaffAction">
+			<forward name="registered" path="/registered.jsp" />
+		</action>
+	</action-mappings>
+
+
+
+
+	<controller
+		processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
+
+	<message-resources
+		parameter="com/tutorials4u/ApplicationResource" />
+
+	<!-- ========================= Tiles plugin =============================== -->
+	<!-- This plugin initialize Tiles definition factory. This later can takes 
+		some parameters explained here after. The plugin first read parameters from 
+		web.xml, thenoverload them with parameters defined here. All parameters are 
+		optional. The plugin should be declared in each struts-config file. - definitions-config: 
+		(optional) Specify configuration file names. There can be several comma separated 
+		file names (default: ?? ) - moduleAware: (optional - struts1.1) Specify if 
+		the Tiles definition factory is module aware. If true (default), there will 
+		be one factory for each Struts module. If false, there will be one common 
+		factory for all module. In this later case, it is still needed to declare 
+		one plugin per module. The factory will be initialized with parameters found 
+		in the first initialized plugin (generally the one associated with the default 
+		module). true : One factory per module. (default) false : one single shared 
+		factory for all modules - definitions-parser-validate: (optional) Specify 
+		if xml parser should validate the Tiles configuration file. true : validate. 
+		DTD should be specified in file header (default) false : no validation Paths 
+		found in Tiles definitions are relative to the main context. -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config"
+			value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="true" />
+	</plug-in>
+
+	<!-- ========================= Validator plugin ================================= -->
+	<plug-in
+		className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
 </struts-config>

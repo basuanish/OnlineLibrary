@@ -1,5 +1,9 @@
 package com.capgemini.eLibrary.dao;
 
-public interface StaffDAO {
+import javax.sql.DataSource;
 
+import com.capgemini.eLibrary.dto.StaffMember;
+
+public interface StaffDAO {
+	String createStaff(StaffMember staffMember, DataSource dataSource);
 }
