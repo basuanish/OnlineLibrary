@@ -102,4 +102,44 @@ public class StaffDAOImpl implements StaffDAO{
 		}
 		return "New staff member created";
 	}
+
+	@Override
+	public StaffMember findById(String staffID) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		StaffMember staffMember=null;
+		/*
+		 * 	STAFF_ID VARCHAR(10),
+		    STAFF_NAME VARCHAR(30),
+		    USER_NAME VARCHAR(20) UNIQUE NOT NULL,
+		    PASS VARCHAR(20) NOT NULL,
+		    PHONENO VARCHAR(10) UNIQUE NOT NULL,
+		    ADDRESS VARCHAR(1000),
+		    DESIGNATION VARCHAR(20) NOT NULL
+		 */
+		try {
+			connection = DBUtilities.getConnection();
+			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
+			preparedStatement = connection.prepareStatement(query);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.getFetchSize()==0)
+				return staffMember;
+			
+			staffMember=new StaffMember();
+			if (resultSet.next()) {
+				staffMember.setStaffID(resultSet.getString(1));
+				staffMember.setName(resultSet.getString(2));
+				staffMember.setUsername(resultSet.getString(3));
+				staffMember.setPhoneNo(resultSet.getString(5));
+				staffMember.setAddress(resultSet.getString(6));
+				staffMember.setDesignation(resultSet.getString(7));
+			}
+		} catch (SQLException exception){
+			throw (exception);
+		} finally {
+			DBUtilities.closePreparedStatement(preparedStatement);
+			DBUtilities.closeConnection(connection);
+		}
+		return staffMember;
+	}
 }

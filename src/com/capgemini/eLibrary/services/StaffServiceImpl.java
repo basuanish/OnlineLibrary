@@ -53,8 +53,17 @@ public class StaffServiceImpl implements StaffService {
 
 	@Override
 	public StaffMember fetchStaff(StaffMember staffMemberWithIdOnly) throws StaffFetchingException {
-		// TODO Auto-generated method stub
-		return null;
+		StaffDAO staffDAO = new StaffDAOImpl();
+		String staffID = staffMemberWithIdOnly.getStaffID();
+		StaffMember staffMember = null;
+		try {
+			staffMember = staffDAO.findById(staffID);
+			if(staffMember==null)
+				throw new StaffFetchingException("The typed ID does not exist!!!");
+		}catch(SQLException exception) {
+			throw new StaffFetchingException(exception.getMessage());
+		}
+		return staffMember;
 	}
 
 	@Override
