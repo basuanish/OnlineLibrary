@@ -39,7 +39,5 @@ public class DBUtilities {
 			} catch (SQLException e) {
 			}
 		}
-
 	}
-
 }

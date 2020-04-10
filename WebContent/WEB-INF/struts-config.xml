@@ -15,8 +15,6 @@
     
     </global-exceptions>
 
-	<global-exceptions>
-
     <action-mappings>
         <action input="/login.jsp" name="LoginForm" path="/Login" scope="session" type="com.capgemini.eLibrary.actions.LoginAction">
             <forward name="success" path="/admin.jsp" />
@@ -53,5 +51,5 @@
     Specify if xml parser should validate the Tiles configuration file.
     true : validate. DTD should be specified in file header (default)
     false : no validation
-
+	-->
 </struts-config>
