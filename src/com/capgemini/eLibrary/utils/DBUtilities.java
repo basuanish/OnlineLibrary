@@ -11,8 +11,8 @@ public class DBUtilities {
 		Connection con = null;
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/OnlineLibrary", "root", "password");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryDB", "root", "pass");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -27,7 +27,8 @@ public class DBUtilities {
 		if (con != null) {
 			try {
 				con.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
+				System.out.println("closing connection error: "+e.getMessage());
 			}
 		}
 	}
@@ -36,7 +37,8 @@ public class DBUtilities {
 		if (ps != null) {
 			try {
 				ps.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
+				System.out.println("closing prepStmt error: "+e.getMessage());
 			}
 		}
 	}

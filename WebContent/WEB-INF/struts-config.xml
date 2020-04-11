@@ -20,7 +20,10 @@
             <forward name="success" path="/admin.jsp" />
             <forward name="failure" path="/failure.jsp" />
         </action>
-        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+        <action input="/viewStaff.jsp" name="ViewStaffForm" path="/ViewStaff" scope="session" type="com.capgemini.eLibrary.actions.ViewStaffAction">
+            <forward name="view successful" path="/staffDetails.jsp" />
+            <forward name="view failed" path="/viewStaff.jsp" /> 
+        </action> 
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

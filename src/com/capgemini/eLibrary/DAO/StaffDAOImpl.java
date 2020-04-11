@@ -19,17 +19,23 @@ public class StaffDAOImpl implements StaffDAO{
 			connection = DBUtilities.getConnection();
 			String query = "select * from STAFF_MEMBERS where USER_NAME=?";
 			preparedStatement = connection.prepareStatement(query);
+		} catch (SQLException exception){
+			throw (exception);
+		} finally {
+			DBUtilities.closeConnection(connection);
+		}
+		
+		try {
 			preparedStatement.setString(1, username);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			if (rs.next()) {
+			ResultSet resultSet = preparedStatement.executeQuery();
+	
+			if (resultSet.next()) {
 				staffExists = true;
 			}
 		} catch (SQLException exception){
 			throw (exception);
 		} finally {
 			DBUtilities.closePreparedStatement(preparedStatement);
-			DBUtilities.closeConnection(connection);
 		}
 		return staffExists;
 	}
@@ -64,6 +70,7 @@ public class StaffDAOImpl implements StaffDAO{
 	
 		Connection connection = null;
 		PreparedStatement preparedStatement0 = null, preparedStatement = null;
+		String staffID=null;
 		/*
 		 * 	STAFF_ID VARCHAR(10),
 		    STAFF_NAME VARCHAR(30),
@@ -90,16 +97,17 @@ public class StaffDAOImpl implements StaffDAO{
 			preparedStatement.setString(5, staffMember.getPhoneNo());
 			preparedStatement.setString(6, staffMember.getAddress());
 			preparedStatement.setString(7, staffMember.getDesignation());
-			resultSet = preparedStatement.executeQuery();
+			preparedStatement.executeUpdate();
+			staffID=primaryKey;
 			
 		} catch (SQLException exception){
 			throw (exception);
 		} finally {
-			DBUtilities.closePreparedStatement(preparedStatement0);
 			DBUtilities.closePreparedStatement(preparedStatement);
+			DBUtilities.closePreparedStatement(preparedStatement0);
 			DBUtilities.closeConnection(connection);
 		}
-		return "New staff member created";
+		return staffID;
 	}
 
 	@Override
@@ -107,15 +115,7 @@ public class StaffDAOImpl implements StaffDAO{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		StaffMember staffMember=null;
-		/*
-		 * 	STAFF_ID VARCHAR(10),
-		    STAFF_NAME VARCHAR(30),
-		    USER_NAME VARCHAR(20) UNIQUE NOT NULL,
-		    PASS VARCHAR(20) NOT NULL,
-		    PHONENO VARCHAR(10) UNIQUE NOT NULL,
-		    ADDRESS VARCHAR(1000),
-		    DESIGNATION VARCHAR(20) NOT NULL
-		 */
+		
 		try {
 			connection = DBUtilities.getConnection();
 			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
