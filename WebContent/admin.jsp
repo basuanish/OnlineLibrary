@@ -18,6 +18,7 @@
 			<tr><td><a href="newstaff.jsp"> Create new staff </a></td></tr>
 			<tr><td><a href="showstaff.jsp"> Show staff deatils </a></td></tr>
 			<tr><td><a href="bookdetails.jsp"> Show Book deatils </a></td></tr>
+			<tr><td><a href="addBooks.jsp"> Add new Book</a></td></tr>
 			
 	</table>
 		</div>

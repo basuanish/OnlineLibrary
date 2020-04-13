@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import com.capgemini.eLibrary.dto.Books;
 import com.capgemini.eLibrary.utils.DBUtilis;
-import com.capgemini.eLibrary.utils.DBUtilities;
 
 public class BooksDAOImpl implements BooksDAO {
 
@@ -36,9 +35,9 @@ public class BooksDAOImpl implements BooksDAO {
 		catch (SQLException exception){
 			throw (exception);
 		}finally {
-			DBUtilities.closePreparedStatement(preparedStatement);
-			DBUtilities.closePreparedStatement(preparedStatement0);
-			DBUtilities.closeConnection(connection);
+			DBUtilis.closePreparedStatement(preparedStatement);
+			DBUtilis.closePreparedStatement(preparedStatement0);
+			DBUtilis.closeConnection(connection);
 		}
 		return "book added successfully";
 	}
