@@ -1,55 +1,61 @@
 package com.capgemini.eLibrary.actions;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.DynaActionForm;
 
 import com.capgemini.eLibrary.dto.StaffMember;
+import com.capgemini.eLibrary.forms.CreateStaffForm;
+import com.capgemini.eLibrary.services.StaffService;
+import com.capgemini.eLibrary.services.StaffServiceImpl;
 
 public class CreateStaffAction extends Action{
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, ServletRequest request, ServletResponse response)
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		/*
-		 * private String name;
-	private String username;
-	private String password;
-	private String repassword;
-	private String phoneNo;
-	private String address;
-	private String designation;
-		 */
-		DynaActionForm staffRegistrationForm = (DynaActionForm) form;
+		HttpSession session = request.getSession(true);
+		CreateStaffForm createStaffForm = (CreateStaffForm) form;
         StaffMember newStaff=new StaffMember();
-		newStaff.setName(staffRegistrationForm.get("name").toString());
-        String username = staffRegistrationForm.get("username").toString();
-        /*if(username.equals("")) {
-        	
-        }*/
-        System.out.println("new staff creation begins");
-        newStaff.setUsername(username);
-        newStaff.setPassword(staffRegistrationForm.get("password").toString());
-        String confirmPassword = staffRegistrationForm.get("rePassword").toString();
+        StaffService staffService = new StaffServiceImpl();
+		newStaff.setName(createStaffForm.getName());
+        
+		newStaff.setUsername(createStaffForm.getUsername());
+        try {
+	        if(staffService.checkUsernameForStaff(newStaff))
+	        	throw new Exception("Username already exists!!!");
+        }catch(Exception exception) {
+        	throw new Exception(exception.getMessage());
+        }
+        
+        newStaff.setPhoneNo(createStaffForm.getPhoneNo());
+        try {
+	        if(staffService.checkPhoneNoForStaff(newStaff))
+	        	throw new Exception("PhoneNo already exists!!!");
+        }catch(Exception exception) {
+        	throw new Exception(exception.getMessage());
+        }
+        
+        newStaff.setPassword(createStaffForm.getPassword());
+        String confirmPassword = createStaffForm.getRepassword();
         if(!newStaff.getPassword().equals(confirmPassword)) {
         	throw new Exception("Passwords do not match!!!");
         }
-        newStaff.setAddress(staffRegistrationForm.get("address").toString());
-        newStaff.setPhoneNo(staffRegistrationForm.get("phoneNo").toString());
-        newStaff.setDesignation(staffRegistrationForm.get("designation").toString());
+        
+        newStaff.setAddress(createStaffForm.getAddress());
+        newStaff.setDesignation(createStaffForm.getDesignation());
+        
         System.out.println(newStaff);
-        return mapping.findForward("registered");
-        /*if(userName.equals(password) )
-        {
-            return mapping.findForward("success");
+        try {
+        	newStaff.setStaffID(staffService.createStaff(newStaff));
+        	session.setAttribute("staffMember", newStaff);
+        	return mapping.findForward("registered");
+        }catch(Exception exception) {
+        	throw new Exception(exception.getMessage());
         }
-        else
-        {
-            return mapping.findForward("failure");
-        }*/
 	}
 }

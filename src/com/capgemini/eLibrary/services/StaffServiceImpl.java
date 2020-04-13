@@ -20,7 +20,7 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffExists = staffDAO.existsByUsername(username);
 		}catch(SQLException exception) {
-			throw new BackendException(exception.getMessage());
+			throw new BackendException("Backend exception : "+exception.getMessage());
 		}
 		return staffExists;
 	}
@@ -33,7 +33,7 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffExists = staffDAO.existsByUsername(phoneNo);
 		}catch(SQLException exception) {
-			throw new BackendException(exception.getMessage());
+			throw new BackendException("Backend exception : "+exception.getMessage());
 		}
 		return staffExists;
 	}
@@ -45,7 +45,7 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffID = staffDAO.addStaffRow(staffMember);
 		}catch(SQLException exception) {
-			throw new StaffCreationException(exception.getMessage());
+			throw new StaffCreationException("StaffCreationException : "+exception.getMessage());
 		}
 		return staffID;
 	}
@@ -58,9 +58,9 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffMember = staffDAO.findById(staffID);
 			if(staffMember==null)
-				throw new StaffFetchingException("The typed ID does not exist!!!");
+				throw new StaffFetchingException("StaffFetchingException : The typed ID does not exist!!!");
 		}catch(SQLException exception) {
-			throw new StaffFetchingException(exception.getMessage());
+			throw new StaffFetchingException("StaffFetchingException : "+exception.getMessage());
 		}
 		return staffMember;
 	}
@@ -73,9 +73,9 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffMember = staffDAO.deleteById(staffID);
 			if(staffMember==null)
-				throw new StaffDeletionException("The typed ID does not exist!!!");
+				throw new StaffDeletionException("StaffDeletionException : The typed ID does not exist!!!");
 		}catch(SQLException exception) {
-			throw new StaffDeletionException(exception.getMessage());
+			throw new StaffDeletionException("StaffDeletionException : "+exception.getMessage());
 		}
 		return "Staff Member with typed ID has been deleted";
 	}

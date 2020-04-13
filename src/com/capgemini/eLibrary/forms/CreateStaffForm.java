@@ -25,16 +25,28 @@ public class CreateStaffForm extends ActionForm{
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
-
+		//[A-Z][a-z]*([ ][A-Z][a-z]*)*
 		if (name == null || name.length() < 1) 
-			errors.add("name", new ActionMessage("error.userName.required"));
+			errors.add("name", new ActionMessage("error.name.required"));
 	
-		if(!name.matches("[A-Z][a-z]* [[A-Z][a-z]*]"))
-			errors.add("name", new ActionMessage(""));
+		//[A-Za-z][A-Za-z_0-9]+
+		if (username == null || username.length() < 1) 
+			errors.add("username", new ActionMessage("error.userName.required"));
+		
 		if (password == null || password.length() < 1) {
 			errors.add("password", new ActionMessage("error.password.required"));
-
 		}
+		
+		if (!password.equals(repassword)) 
+			errors.add("repassword", new ActionMessage("error.password.mismatch"));
+		
+		if (!phoneNo.matches("[0-9]{10}")) 
+			errors.add("phoneNo", new ActionMessage("error.phoneNo.wrongFormat"));
+		
+		if (designation == null || designation.length() < 1) {
+			errors.add("designation", new ActionMessage("error.designation.required"));
+		}
+		
 		return errors;
 	}
 
