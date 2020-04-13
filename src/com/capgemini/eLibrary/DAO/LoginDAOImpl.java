@@ -20,7 +20,7 @@ public class LoginDAOImpl implements LoginDAO {
 		try {
 			con = DBUtilis.getConnection();
 
-			String query = "select * from login where userName=? and password=?";
+			String query = "select * from Login where userName=? and password=?";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setString(1, loginForm.getUserName());
 			stmt.setString(2, loginForm.getPassword());
@@ -28,6 +28,7 @@ public class LoginDAOImpl implements LoginDAO {
 
 			if (rs.next()) {
 				access = true;
+				System.out.println("Here");
 			}
 			else {
 				throw new InvalidUserException("Incorrect Username/Password.");
