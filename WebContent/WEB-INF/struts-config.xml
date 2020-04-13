@@ -9,6 +9,8 @@
     <form-beans>
         <form-bean name="LoginForm" type="com.capgemini.eLibrary.forms.LoginForm">
         </form-bean>
+        <form-bean name="AddBooksForm" type="com.capgemini.eLibrary.forms.AddBooksForm">
+        </form-bean>
     </form-beans>
     
     <global-exceptions>
@@ -24,6 +26,11 @@
             <forward name="view successful" path="/staffDetails.jsp" />
             <forward name="view failed" path="/viewStaff.jsp" /> 
         </action> 
+        
+        <action input="/addBooks.jsp" name="AddBooksForm" path="/addBooks" validate = "true"  type="com.capgemini.eLibrary.actions.AddBooksAction">
+            <forward name="addBooksSucces" path="/addBooksSucces.jsp" />
+        </action> 
+        
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
