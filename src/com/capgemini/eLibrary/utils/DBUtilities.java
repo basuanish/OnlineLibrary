@@ -12,7 +12,7 @@ public class DBUtilities {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LibraryDB", "root", "pass");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlinelibrary", "root", "password");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
