@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import com.capgemini.eLibrary.exceptions.InvalidUserException;
 import com.capgemini.eLibrary.forms.LoginForm;
-import com.capgemini.eLibrary.utils.DBUtilities;
+import com.capgemini.eLibrary.utils.DBUtilis;
 
 public class LoginDAOImpl implements LoginDAO {
 
@@ -18,7 +18,7 @@ public class LoginDAOImpl implements LoginDAO {
 		boolean access = false;
 
 		try {
-			con = DBUtilities.getConnection();
+			con = DBUtilis.getConnection();
 
 			String query = "select * from login where userName=? and password=?";
 			PreparedStatement stmt = con.prepareStatement(query);
@@ -33,7 +33,7 @@ public class LoginDAOImpl implements LoginDAO {
 				throw new InvalidUserException("Incorrect Username/Password.");
 			}
 		} finally {
-			DBUtilities.closeConnection(con);
+			DBUtilis.closeConnection(con);
 		}
 		return access;
 	}
