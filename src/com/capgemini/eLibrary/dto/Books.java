@@ -2,18 +2,14 @@ package com.capgemini.eLibrary.dto;
 
 public class Books {
 
-	private String serialnumber;
+
 	private String bookname;
 	private String author;
-	private String quantity;
+
 	
 	
-	public String getSerialnumber() {
-		return serialnumber;
-	}
-	public void setSerialnumber(String serialnumber) {
-		this.serialnumber = serialnumber;
-	}
+
+
 	public String getBookname() {
 		return bookname;
 	}
@@ -26,18 +22,12 @@ public class Books {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
-	}
-	public Books(String serialnumber, String bookname, String author, String quantity) {
+
+	public Books( String bookname, String author) {
 		super();
-		this.serialnumber = serialnumber;
+	
 		this.bookname = bookname;
 		this.author = author;
-		this.quantity = quantity;
 	}
 	
 	

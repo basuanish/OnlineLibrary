@@ -27,17 +27,21 @@ public class AddBooksAction extends Action {
 		HttpSession ses = request.getSession(true);
 		
 		AddBooksForm addBooksForm = (AddBooksForm) form;
-		String serialnumber = addBooksForm.getSerialnumber();
+		
         String bookname = addBooksForm.getBookname();
         String author = addBooksForm.getAuthor();
-        String quantity = addBooksForm.getQuantity();
-        Books books = new Books(serialnumber,bookname,author,quantity);
+       
+        Books books = new Books(bookname,author);
         BooksDAO booksDAO = new BooksDAOImpl() ;
         booksDAO.addBooks(books);
-        ses.setAttribute("serialnumber", serialnumber);
+       
         ses.setAttribute("bookname", bookname);
         ses.setAttribute("author", author);
-        ses.setAttribute("quantity", quantity);
+        
+        if (bookname.equals("") || bookname.equals("")){
+            return mapping.findForward("addBooksError");
+        }
+
         return mapping.findForward("addBooksSucces");
 	
 	}
