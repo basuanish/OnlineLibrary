@@ -110,7 +110,7 @@ public class BooksDAOImpl implements BooksDAO {
 			preparedStatement.setString(2, book.getAuthor());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			Book singleBook;
-			if (resultSet.next()) {
+			while(resultSet.next()) {
 				singleBook = new Book();
 				singleBook.setBookId(resultSet.getInt(1));
 				singleBook.setBookname(resultSet.getString(2));
