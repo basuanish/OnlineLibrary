@@ -24,9 +24,7 @@ public class LoginDAOImpl implements LoginDAO {
 
 			String query = "select * from Login where userName=? and password=?";
 			stmt = con.prepareStatement(query);
-
-			String query = "select * from Login where userName=? and password=?";
-			PreparedStatement stmt = con.prepareStatement(query);
+			
 			stmt.setString(1, loginForm.getUserName());
 			stmt.setString(2, loginForm.getPassword());
 			ResultSet rs = stmt.executeQuery();

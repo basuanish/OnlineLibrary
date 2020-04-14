@@ -22,27 +22,13 @@ public class BooksDAOImpl implements BooksDAO {
 
 			
 			connection = DBUtilis.getInstance().getConnection();
-			String query = "select * from Books";
-			preparedStatement0 = connection.prepareStatement(query);
-			preparedStatement0.executeQuery();
 			
-			query = "INSERT INTO Books (bookname,author,issued) VALUES (?,?,?)";
-
-			connection = DBUtilis.getConnection();
-			String query = "select * from Books";
-			preparedStatement0 = connection.prepareStatement(query);
-			ResultSet resultSet = preparedStatement0.executeQuery();
-			int rows = resultSet.getFetchSize()+1;
-			
-			
-			query = "INSERT INTO Books VALUES (?,?)";
-
-			preparedStatement = connection.prepareStatement(query);
-
+			String query = "INSERT INTO Books (bookname,author,issued) VALUES (?,?,?)";
+			preparedStatement = connection.prepareStatement(query);			
 			preparedStatement.setString(1, books.getBookname());
 			preparedStatement.setString(2, books.getAuthor());
 			preparedStatement.setBoolean(3, false);
-			preparedStatement.executeUpdate();
+			preparedStatement.executeQuery();
 
 		}
 		catch (SQLException exception){
@@ -53,7 +39,6 @@ public class BooksDAOImpl implements BooksDAO {
 //			DBUtilis.closePreparedStatement(preparedStatement0);
 //			DBUtilis.closeConnection(connection);
 			preparedStatement.close();
-			preparedStatement0.close();
 			connection.close();
 		}
 		return "book added successfully";
@@ -71,7 +56,7 @@ public class BooksDAOImpl implements BooksDAO {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = DBUtilis.getConnection();
+			connection = DBUtilis.getInstance().getConnection();
 			String query = "delete from Books where bookId=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, bookId);
@@ -79,8 +64,8 @@ public class BooksDAOImpl implements BooksDAO {
 		} catch (SQLException exception){
 			throw (exception);
 		} finally {
-			DBUtilis.closePreparedStatement(preparedStatement);
-			DBUtilis.closeConnection(connection);
+			preparedStatement.close();
+			connection.close();
 		}
 		return booksDeleted;
 	}
@@ -92,7 +77,7 @@ public class BooksDAOImpl implements BooksDAO {
 		Books books=null;
 		
 		try {
-			connection = DBUtilis.getConnection();
+			connection = DBUtilis.getInstance().getConnection();
 			String query = "select * from Books where bookId=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, bookId);
@@ -107,8 +92,8 @@ public class BooksDAOImpl implements BooksDAO {
 		} catch (SQLException exception){
 			throw (exception);
 		} finally {
-			DBUtilis.closePreparedStatement(preparedStatement);
-			DBUtilis.closeConnection(connection);
+			preparedStatement.close();
+			connection.close();
 		}
 		return books;
 	}

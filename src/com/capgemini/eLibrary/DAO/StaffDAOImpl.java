@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import com.capgemini.eLibrary.dto.StaffMember;
 import com.capgemini.eLibrary.utils.DBUtilis;
 
-public class StaffDAOImpl implements StaffDAO{
+public class StaffDAOImpl implements StaffDAO {
 
 	@Override
-	public boolean existsByUsername(String username) throws SQLException{
+	public boolean existsByUsername(String username) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		boolean staffExists = false;
@@ -24,11 +24,11 @@ public class StaffDAOImpl implements StaffDAO{
 
 			preparedStatement.setString(1, username);
 			ResultSet resultSet = preparedStatement.executeQuery();
-	
+
 			if (resultSet.next()) {
 				staffExists = true;
 			}
-		} catch (SQLException exception){
+		} catch (SQLException exception) {
 			throw (exception);
 		} finally {
 
@@ -41,7 +41,7 @@ public class StaffDAOImpl implements StaffDAO{
 	}
 
 	@Override
-	public boolean existsByPhoneNo(String phoneNo) throws SQLException{
+	public boolean existsByPhoneNo(String phoneNo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		boolean staffExists = false;
@@ -57,7 +57,7 @@ public class StaffDAOImpl implements StaffDAO{
 			if (rs.next()) {
 				staffExists = true;
 			}
-		} catch (SQLException exception){
+		} catch (SQLException exception) {
 			throw (exception);
 		} finally {
 
@@ -69,16 +69,15 @@ public class StaffDAOImpl implements StaffDAO{
 		}
 		return staffExists;
 	}
-	
-	
+
 	@Override
-	public StaffMember createStaff(StaffMember staffMember) throws SQLException{
+	public StaffMember createStaff(StaffMember staffMember) throws SQLException {
 		try {
 			addStaffRow(staffMember);
-		}catch(SQLException exception) {
+		} catch (SQLException exception) {
 			throw (exception);
 		}
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
@@ -90,7 +89,7 @@ public class StaffDAOImpl implements StaffDAO{
 			if (rs.next()) {
 				staffMember.setStaffID(rs.getInt(1));
 			}
-		} catch (SQLException exception){
+		} catch (SQLException exception) {
 			throw (exception);
 		} finally {
 			preparedStatement.close();
@@ -98,16 +97,12 @@ public class StaffDAOImpl implements StaffDAO{
 		}
 		return staffMember;
 	}
-	
-	public void addStaffRow(StaffMember staffMember) throws SQLException{
-		Connection connection = null;
 
-		PreparedStatement preparedStatement = null;
-		String staffID=null;
-		
+	public void addStaffRow(StaffMember staffMember) throws SQLException {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			
+
 			connection = DBUtilis.getInstance().getConnection();
 			String query = "INSERT INTO STAFF_MEMBERS (STAFF_NAME, USER_NAME, PASS, PHONENO, ADDRESS, DESIGNATION) VALUES (?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(query);
@@ -118,7 +113,7 @@ public class StaffDAOImpl implements StaffDAO{
 			preparedStatement.setString(5, staffMember.getAddress());
 			preparedStatement.setString(6, staffMember.getDesignation());
 			preparedStatement.executeUpdate();
-		} catch (SQLException exception){
+		} catch (SQLException exception) {
 			throw (exception);
 		} finally {
 
@@ -128,13 +123,12 @@ public class StaffDAOImpl implements StaffDAO{
 		}
 	}
 
-	
 	@Override
 	public StaffMember findById(int staffID) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		StaffMember staffMember=null;
-		
+		StaffMember staffMember = null;
+
 		try {
 
 			connection = DBUtilis.getInstance().getConnection();
@@ -143,9 +137,9 @@ public class StaffDAOImpl implements StaffDAO{
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, staffID);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			if (resultSet.next()) {
-				staffMember=new StaffMember();
+				staffMember = new StaffMember();
 				staffMember.setStaffID(resultSet.getInt(1));
 				staffMember.setName(resultSet.getString(2));
 				staffMember.setUsername(resultSet.getString(3));
@@ -153,7 +147,7 @@ public class StaffDAOImpl implements StaffDAO{
 				staffMember.setAddress(resultSet.getString(6));
 				staffMember.setDesignation(resultSet.getString(7));
 			}
-		} catch (SQLException exception){
+		} catch (SQLException exception) {
 			throw (exception);
 		} finally {
 
@@ -166,33 +160,28 @@ public class StaffDAOImpl implements StaffDAO{
 
 	@Override
 	public StaffMember deleteById(int staffID) throws SQLException {
-		Connection connection = null;
-		StaffMember staffMemberDeleted=null;
+		StaffMember staffMemberDeleted = null;
 		try {
-
-			connection = DBUtilis.getInstance().getConnection();
-			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
-
 			staffMemberDeleted = findById(staffID);
-		}catch(SQLException exception) {
+		} catch (SQLException exception) {
 			throw (exception);
 		}
 		
-		
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = DBUtilis.getConnection();
+			connection = DBUtilis.getInstance().getConnection();
 			String query = "delete from STAFF_MEMBERS where STAFF_ID=?";
 
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, staffID);
 			preparedStatement.executeUpdate();
-		} catch (SQLException exception){
+		} catch (SQLException exception) {
 			throw (exception);
 		} finally {
 
 			preparedStatement.close();
-			
+
 			connection.close();
 
 		}
