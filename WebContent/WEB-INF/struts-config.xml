@@ -14,6 +14,8 @@
         <form-bean name="ViewStaffForm" type="com.capgemini.eLibrary.forms.ViewStaffForm">
         </form-bean>
          <form-bean name="IssueBookForm" type="com.capgemini.eLibrary.forms.IssueBookForm">
+	 </form-bean>
+        <form-bean name="DeleteStaffForm" type="com.capgemini.eLibrary.forms.DeleteStaffForm">
         </form-bean>
         <form-bean name="AddBooksForm" type="com.capgemini.eLibrary.forms.AddBooksForm">
         </form-bean>
@@ -35,7 +37,12 @@
             <forward name="view successful" path="/staffDetails.jsp" />
             <forward name="view failed" path="/viewStaff.jsp" /> 
         </action>
-        
+
+        <action input="/deleteStaff.jsp" name="DeleteStaffForm" path="/DeleteStaff" scope="session" type="com.capgemini.eLibrary.actions.DeleteStaffAction">
+            <forward name="deletion successful" path="/deletedStaffDetails.jsp" />
+            <forward name="deletion failed" path="/deleteStaff.jsp" /> 
+        </action>
+
         <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
             <forward name="registered" path="/registered.jsp" /> 
            
@@ -44,6 +51,7 @@
         <action input="/addBooks.jsp" name="AddBooksForm" path="/addBooks" validate = "true"  type="com.capgemini.eLibrary.actions.AddBooksAction">
             <forward name="addBooksSucces" path="/addBooksSucces.jsp" />
              <forward name="addBooksError" path="/bookerrors.jsp" />
+
         </action> 
         
          <action input="/memberLogin.jsp" name="MemberLoginForm" path="/MemberLogin" scope="request" type="com.capgemini.eLibrary.actions.MemberLoginAction">
@@ -54,6 +62,7 @@
         <action input="/issueBook.jsp" name="IssueBookForm" path="/IssueBook" validate = "true"  type="com.capgemini.eLibrary.actions.IssueBookAction">
             <forward name="success" path="/issueBookSuccess.jsp" />
              <forward name="failure" path="/issueBook.jsp" />
+
         </action> 
         
     </action-mappings>

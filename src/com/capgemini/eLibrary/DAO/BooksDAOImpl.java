@@ -18,6 +18,7 @@ public class BooksDAOImpl implements BooksDAO {
 		
 		
 		try {
+
 			
 			connection = DBUtilis.getInstance().getConnection();
 			String query = "select * from Books";
@@ -25,17 +26,29 @@ public class BooksDAOImpl implements BooksDAO {
 			preparedStatement0.executeQuery();
 			
 			query = "INSERT INTO Books (bookname,author,issued) VALUES (?,?,?)";
+
+			connection = DBUtilis.getConnection();
+			String query = "select * from Books";
+			preparedStatement0 = connection.prepareStatement(query);
+			ResultSet resultSet = preparedStatement0.executeQuery();
+			int rows = resultSet.getFetchSize()+1;
+			
+			
+			query = "INSERT INTO Books VALUES (?,?)";
+
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setString(1, books.getBookname());
 			preparedStatement.setString(2, books.getAuthor());
+
 			preparedStatement.setBoolean(3, false);
 			preparedStatement.executeUpdate();
-	
+
 		}
 		catch (SQLException exception){
 			throw (exception);
 		}finally {
+
 //			DBUtilis.closePreparedStatement(preparedStatement);
 //			DBUtilis.closePreparedStatement(preparedStatement0);
 //			DBUtilis.closeConnection(connection);

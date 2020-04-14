@@ -13,7 +13,7 @@ public class CreateStaffForm extends ActionForm{
 	 * 
 	 */
 	private static final long serialVersionUID = 1994330471091949948L;
-	
+	private int staffID;
 	private String name;
 	private String username;
 	private String password;
@@ -50,6 +50,10 @@ public class CreateStaffForm extends ActionForm{
 		return errors;
 	}
 
+	public int getStaffID() {
+		return staffID;
+	}
+	
 	public String getName() {
 		return name;
 	}

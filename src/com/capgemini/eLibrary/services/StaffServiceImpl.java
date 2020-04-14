@@ -39,21 +39,20 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public String createStaff(StaffMember staffMember) throws StaffCreationException {
+	public StaffMember createStaff(StaffMember staffMember) throws StaffCreationException {
 		StaffDAO staffDAO = new StaffDAOImpl();
-		String staffID=null;
 		try {
-			staffID = staffDAO.addStaffRow(staffMember);
+			staffMember=staffDAO.createStaff(staffMember);
 		}catch(SQLException exception) {
 			throw new StaffCreationException("StaffCreationException : "+exception.getMessage());
 		}
-		return staffID;
+		return staffMember;
 	}
 
 	@Override
 	public StaffMember fetchStaff(StaffMember staffMemberWithIdOnly) throws StaffFetchingException {
 		StaffDAO staffDAO = new StaffDAOImpl();
-		String staffID = staffMemberWithIdOnly.getStaffID();
+		int staffID = staffMemberWithIdOnly.getStaffID();
 		StaffMember staffMember = null;
 		try {
 			staffMember = staffDAO.findById(staffID);
@@ -66,9 +65,9 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public String deleteStaff(StaffMember staffMemberWithIdOnly) throws StaffDeletionException {
+	public StaffMember deleteStaff(StaffMember staffMemberWithIdOnly) throws StaffDeletionException {
 		StaffDAO staffDAO = new StaffDAOImpl();
-		String staffID = staffMemberWithIdOnly.getStaffID();
+		int staffID = staffMemberWithIdOnly.getStaffID();
 		StaffMember staffMember = null;
 		try {
 			staffMember = staffDAO.deleteById(staffID);
@@ -77,6 +76,6 @@ public class StaffServiceImpl implements StaffService {
 		}catch(SQLException exception) {
 			throw new StaffDeletionException("StaffDeletionException : "+exception.getMessage());
 		}
-		return "Staff Member with typed ID has been deleted";
+		return staffMember;
 	}
 }

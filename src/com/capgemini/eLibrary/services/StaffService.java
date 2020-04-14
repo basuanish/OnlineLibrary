@@ -9,7 +9,7 @@ import com.capgemini.eLibrary.exceptions.StaffFetchingException;
 public interface StaffService {
 	boolean checkUsernameForStaff(StaffMember staffMember) throws BackendException;
 	boolean checkPhoneNoForStaff(StaffMember staffMember) throws BackendException;
-	String createStaff(StaffMember staffMember) throws StaffCreationException;
+	StaffMember createStaff(StaffMember staffMember) throws StaffCreationException;
 	StaffMember fetchStaff(StaffMember staffMemberWithIdOnly) throws StaffFetchingException;
-	String deleteStaff(StaffMember staffMemberWithIdOnly) throws StaffDeletionException; 
+	StaffMember deleteStaff(StaffMember staffMemberWithIdOnly) throws StaffDeletionException; 
 }

@@ -26,7 +26,7 @@ public class DeleteStaffAction extends Action {
         try
         {
         	staffMember.setStaffID(deleteStaffForm.getStaffID());
-        	staffService.deleteStaff(staffMember);
+        	staffMember=staffService.deleteStaff(staffMember);
         	return mapping.findForward("deletion successful");
         }
         catch (Exception e)

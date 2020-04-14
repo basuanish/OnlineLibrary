@@ -17,6 +17,8 @@
 		<tr><th>Login Success. Welcome <bean:write name="LoginForm" property="userName"></bean:write></th></tr>
 			<tr><td><a href="createStaff.jsp"> Create new staff </a></td></tr>
 			<tr><td><a href="viewStaff.jsp"> Show staff details </a></td></tr>
+			<tr><td><a href="deleteStaff.jsp"> Delete a staff member </a></td></tr>
+
 			<tr><td><a href="bookdetails.jsp"> Show Book details </a></td></tr>
 			<tr><td><a href="addBooks.jsp"> Add new Book</a></td></tr>
 
