@@ -10,10 +10,10 @@
     </head>
     <body>
         <h1>Registration Successful. Staff details:</h1> 
-        Name : <bean:write name="CreateStaffForm" property="name"></bean:write>
-        User Name : <bean:write name="CreateStaffForm" property="username"></bean:write>
-        Phone No : <bean:write name="CreateStaffForm" property="phoneNo"></bean:write>
-        Address : <bean:write name="CreateStaffForm" property="address"></bean:write>
-        Designation : <bean:write name="CreateStaffForm" property="designation"></bean:write>
+        Name : <bean:write name="CreateStaffForm" property="name"></bean:write><br>
+        User Name : <bean:write name="CreateStaffForm" property="username"></bean:write><br>
+        Phone No : <bean:write name="CreateStaffForm" property="phoneNo"></bean:write><br>
+        Address : <bean:write name="CreateStaffForm" property="address"></bean:write><br>
+        Designation : <bean:write name="CreateStaffForm" property="designation"></bean:write><br>
     </body>
 </html>

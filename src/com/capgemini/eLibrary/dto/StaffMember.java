@@ -1,7 +1,7 @@
 package com.capgemini.eLibrary.dto;
 
 public class StaffMember {
-	private String staffID;
+	private int staffID;
 	private String name;
 	private String username;
 	private String password;
@@ -23,11 +23,11 @@ public class StaffMember {
 		this.designation = designation;
 	}
 
-	public String getStaffID() {
+	public int getStaffID() {
 		return staffID;
 	}
 
-	public void setStaffID(String staffID) {
+	public void setStaffID(int staffID) {
 		this.staffID = staffID;
 	}
 

@@ -59,44 +59,60 @@ public class StaffDAOImpl implements StaffDAO{
 		return staffExists;
 	}
 	
-	@Override
-	public String addStaffRow(StaffMember staffMember) throws SQLException{
 	
+	@Override
+	public StaffMember createStaff(StaffMember staffMember) throws SQLException{
+		try {
+			addStaffRow(staffMember);
+		}catch(SQLException exception) {
+			throw (exception);
+		}
+		
 		Connection connection = null;
-		PreparedStatement preparedStatement0 = null, preparedStatement = null;
-		String staffID=null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = DBUtilis.getConnection();
-			String query = "select * from STAFF_MEMBERS";
-			preparedStatement0 = connection.prepareStatement(query);
-			ResultSet resultSet = preparedStatement0.executeQuery();
-			int rows = resultSet.getFetchSize()+1;
-			String primaryKey="S"+rows;
-			System.out.println("primary key : "+primaryKey);
-			query = "INSERT INTO STAFF_MEMBERS VALUES (?,?,?,?,?,?,?)";
+			String query = "select * from STAFF_MEMBERS where USER_NAME=?";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, primaryKey);
-			preparedStatement.setString(2, staffMember.getName());
-			preparedStatement.setString(3, staffMember.getUsername());
-			preparedStatement.setString(4, staffMember.getPassword());
-			preparedStatement.setString(5, staffMember.getPhoneNo());
-			preparedStatement.setString(6, staffMember.getAddress());
-			preparedStatement.setString(7, staffMember.getDesignation());
-			preparedStatement.executeUpdate();
-			staffID=primaryKey;
-			
+			preparedStatement.setString(1, staffMember.getUsername());
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				staffMember.setStaffID(rs.getInt(1));
+			}
 		} catch (SQLException exception){
 			throw (exception);
 		} finally {
-			DBUtilities.closePreparedStatement(preparedStatement0);
-			DBUtilities.closePreparedStatement(preparedStatement);
-			DBUtilities.closeConnection(connection);
+			DBUtilis.closePreparedStatement(preparedStatement);
+			DBUtilis.closeConnection(connection);
 		}
-		return staffID;
+		return staffMember;
+	}
+	
+	public void addStaffRow(StaffMember staffMember) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = DBUtilis.getConnection();
+			String query = "INSERT INTO STAFF_MEMBERS (STAFF_NAME, USER_NAME, PASS, PHONENO, ADDRESS, DESIGNATION) VALUES (?,?,?,?,?,?)";
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, staffMember.getName());
+			preparedStatement.setString(2, staffMember.getUsername());
+			preparedStatement.setString(3, staffMember.getPassword());
+			preparedStatement.setString(4, staffMember.getPhoneNo());
+			preparedStatement.setString(5, staffMember.getAddress());
+			preparedStatement.setString(6, staffMember.getDesignation());
+			preparedStatement.executeUpdate();
+		} catch (SQLException exception){
+			throw (exception);
+		} finally {
+			DBUtilis.closePreparedStatement(preparedStatement);
+			DBUtilis.closeConnection(connection);
+		}
 	}
 
+	
 	@Override
-	public StaffMember findById(String staffID) throws SQLException {
+	public StaffMember findById(int staffID) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		StaffMember staffMember=null;
@@ -105,14 +121,12 @@ public class StaffDAOImpl implements StaffDAO{
 			connection = DBUtilis.getConnection();
 			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, staffID);
+			preparedStatement.setInt(1, staffID);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if(resultSet.getFetchSize()==0)
-				return staffMember;
 			
-			staffMember=new StaffMember();
 			if (resultSet.next()) {
-				staffMember.setStaffID(resultSet.getString(1));
+				staffMember=new StaffMember();
+				staffMember.setStaffID(resultSet.getInt(1));
 				staffMember.setName(resultSet.getString(2));
 				staffMember.setUsername(resultSet.getString(3));
 				staffMember.setPhoneNo(resultSet.getString(5));
@@ -129,46 +143,26 @@ public class StaffDAOImpl implements StaffDAO{
 	}
 
 	@Override
-	public StaffMember deleteById(String staffID) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null, preparedStatement1 = null;
+	public StaffMember deleteById(int staffID) throws SQLException {
 		StaffMember staffMemberDeleted=null;
-		/*
-		 * 	STAFF_ID VARCHAR(10),
-		    STAFF_NAME VARCHAR(30),
-		    USER_NAME VARCHAR(20) UNIQUE NOT NULL,
-		    PASS VARCHAR(20) NOT NULL,
-		    PHONENO VARCHAR(10) UNIQUE NOT NULL,
-		    ADDRESS VARCHAR(1000),
-		    DESIGNATION VARCHAR(20) NOT NULL
-		 */
+		try {
+			staffMemberDeleted = findById(staffID);
+		}catch(SQLException exception) {
+			throw (exception);
+		}
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
 			connection = DBUtilis.getConnection();
-			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
+			String query = "delete from STAFF_MEMBERS where STAFF_ID=?";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, staffID);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			if(resultSet.getFetchSize()==0)
-				return staffMemberDeleted;
-			
-			staffMemberDeleted=new StaffMember();
-			if (resultSet.next()) {
-				staffMemberDeleted.setStaffID(resultSet.getString(1));
-				staffMemberDeleted.setName(resultSet.getString(2));
-				staffMemberDeleted.setUsername(resultSet.getString(3));
-				staffMemberDeleted.setPhoneNo(resultSet.getString(5));
-				staffMemberDeleted.setAddress(resultSet.getString(6));
-				staffMemberDeleted.setDesignation(resultSet.getString(7));
-				query = "delete from STAFF_MEMBERS where STAFF_ID=?";
-				preparedStatement1 = connection.prepareStatement(query);
-				preparedStatement1.setString(1, staffID);
-				preparedStatement1.executeUpdate();
-			}
+			preparedStatement.setInt(1, staffID);
+			preparedStatement.executeUpdate();
 		} catch (SQLException exception){
 			throw (exception);
 		} finally {
 			DBUtilis.closePreparedStatement(preparedStatement);
-			DBUtilis.closePreparedStatement(preparedStatement1);
 			DBUtilis.closeConnection(connection);
 		}
 		return staffMemberDeleted;

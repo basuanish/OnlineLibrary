@@ -51,7 +51,7 @@ public class CreateStaffAction extends Action{
         
         System.out.println(newStaff);
         try {
-        	newStaff.setStaffID(staffService.createStaff(newStaff));
+        	newStaff = staffService.createStaff(newStaff);
         	session.setAttribute("staffMember", newStaff);
         	return mapping.findForward("registered");
         }catch(Exception exception) {

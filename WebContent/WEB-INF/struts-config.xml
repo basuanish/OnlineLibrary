@@ -13,6 +13,8 @@
         </form-bean>
         <form-bean name="ViewStaffForm" type="com.capgemini.eLibrary.forms.ViewStaffForm">
         </form-bean>
+        <form-bean name="DeleteStaffForm" type="com.capgemini.eLibrary.forms.DeleteStaffForm">
+        </form-bean>
         <form-bean name="AddBooksForm" type="com.capgemini.eLibrary.forms.AddBooksForm">
         </form-bean>
     </form-beans>
@@ -31,7 +33,10 @@
             <forward name="view successful" path="/staffDetails.jsp" />
             <forward name="view failed" path="/viewStaff.jsp" /> 
         </action>
-        
+        <action input="/deleteStaff.jsp" name="DeleteStaffForm" path="/DeleteStaff" scope="session" type="com.capgemini.eLibrary.actions.DeleteStaffAction">
+            <forward name="deletion successful" path="/deletedStaffDetails.jsp" />
+            <forward name="deletion failed" path="/deleteStaff.jsp" /> 
+        </action>
         <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
             <forward name="registered" path="/registered.jsp" /> 
         </action> 
