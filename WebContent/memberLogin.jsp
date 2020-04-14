@@ -19,9 +19,9 @@
 		<div id="content-box">
 
 			<%
-				out.print("<h1><font color=blue>WELCOME TO ADMINISTRATION LOGIN</h1>");
+				out.print("<h1><font color=blue>WELCOME TO MEMBER LOGIN</h1>");
 			%>
-			<html:form action="/Login">
+			<html:form action="/MemberLogin">
 				<table height="230" align="center" cellspacing="10" cellpadding="8">
 				 <%if(request.getAttribute("exception")!=null)
 			{
@@ -34,11 +34,11 @@
 			 %>
 					<tr>
 						<td>User Name :</td>
-						<td><html:text name="LoginForm" property="userName" /></td>
+						<td><html:text name="MemberLoginForm" property="userName" /></td>
 					</tr>
 					<tr>
 						<td>Password :</td>
-						<td><html:password name="LoginForm" property="password" /></td>
+						<td><html:password name="MemberLoginForm" property="password" /></td>
 					</tr>
 					<tr>
 						<td></td>

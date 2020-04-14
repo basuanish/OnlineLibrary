@@ -6,22 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.capgemini.eLibrary.exceptions.InvalidUserException;
-import com.capgemini.eLibrary.forms.LoginForm;
+import com.capgemini.eLibrary.forms.MemberLoginForm;
 import com.capgemini.eLibrary.utils.DBUtilis;
 
-public class LoginDAOImpl implements LoginDAO {
+public class MemberLoginDAOImpl implements MemberLoginDAO {
 
 	@Override
-	public boolean checkLogin(LoginForm loginForm) throws SQLException, InvalidUserException {
-
+	public boolean checkLogin(MemberLoginForm loginForm) throws SQLException, InvalidUserException {
 		Connection con = null;
 		boolean access = false;
 		PreparedStatement stmt = null;
-		
+
 		try {
 			con = DBUtilis.getInstance().getConnection();
 
-			String query = "select * from Login where userName=? and password=?";
+			String query = "select * from MemberLogin where userName=? and password=?";
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, loginForm.getUserName());
 			stmt.setString(2, loginForm.getPassword());
@@ -40,4 +39,5 @@ public class LoginDAOImpl implements LoginDAO {
 		}
 		return access;
 	}
+
 }

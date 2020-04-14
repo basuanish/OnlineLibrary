@@ -7,21 +7,23 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.DynaActionForm;
 
 import com.capgemini.eLibrary.DAO.LoginDAO;
 import com.capgemini.eLibrary.DAO.LoginDAOImpl;
+import com.capgemini.eLibrary.DAO.MemberLoginDAO;
+import com.capgemini.eLibrary.DAO.MemberLoginDAOImpl;
 import com.capgemini.eLibrary.forms.LoginForm;
+import com.capgemini.eLibrary.forms.MemberLoginForm;
 
-public class LoginAction extends org.apache.struts.action.Action {
+public class MemberLoginAction extends org.apache.struts.action.Action {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-    	HttpSession ses = request.getSession(true);
-        LoginForm loginForm = (LoginForm)form;
-        LoginDAO dao = new LoginDAOImpl();
+    	//HttpSession ses = request.getSession(true);
+        MemberLoginForm loginForm = (MemberLoginForm)form;
+        MemberLoginDAO dao = new MemberLoginDAOImpl();
         String loginStatus = "failure";
         
         try

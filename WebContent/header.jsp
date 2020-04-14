@@ -15,11 +15,11 @@
          <ul>
            <li><a href="index.jsp">Home</a></li>
                     <li><a href="login.jsp">Adminstrator</a></li>
-                    <li><a href="member.jsp">Library Member</a></li>
+                    <li><a href="memberLogin.jsp">Library Member</a></li>
                     <li><a href="bookDetails.jsp">Book Details</a></li>
                      <li><a href="aboutUs.jsp">About Us</a></li>
                     <li><a href="contactUs.jsp">Contact Us</a></li>
-                     <li><a href="addBooks.jsp">Contact Us</a></li>
+                    <li><a href="addBooks.jsp">Contact Us</a></li>
                 </ul>    	
      
     </div> <!-- end of templatemo_menu -->
