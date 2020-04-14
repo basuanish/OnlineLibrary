@@ -16,6 +16,8 @@
 		<html:errors />
 	</div>
 	<html:form action="addBooks" method="get">
+	
+	        
           
             Book Name : <html:text property="bookname" />
 		<br>
