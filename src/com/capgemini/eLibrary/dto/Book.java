@@ -1,34 +1,25 @@
 package com.capgemini.eLibrary.dto;
 
 public class Book {
-	private String bookID;
-	private String bookName;
+
+	private String bookname;
 	private String author;
+	private int bookId;
 
-	public Book() {
-
+	public int getBookId() {
+		return bookId;
 	}
 
-	public Book(String bookName, String author) {
-		this();
-		this.bookName = bookName;
-		this.author = author;
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
 	}
 
-	public String getBookID() {
-		return bookID;
+	public String getBookname() {
+		return bookname;
 	}
 
-	public void setBookID(String bookID) {
-		this.bookID = bookID;
-	}
-
-	public String getBookName() {
-		return bookName;
-	}
-
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
+	public void setBookname(String bookname) {
+		this.bookname = bookname;
 	}
 
 	public String getAuthor() {
@@ -39,4 +30,21 @@ public class Book {
 		this.author = author;
 	}
 
+	public Book(String bookname, String author) {
+		super();
+
+		this.bookname = bookname;
+		this.author = author;
+	}
+
+	public Book() {
+
+	}
+
+	@Override
+	public String toString() {
+		return "Book [bookname=" + bookname + ", author=" + author + ", bookId=" + bookId + "]";
+	}
+
+	
 }

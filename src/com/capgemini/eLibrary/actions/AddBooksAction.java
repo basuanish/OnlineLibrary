@@ -14,7 +14,7 @@ import org.apache.struts.action.DynaActionForm;
 
 import com.capgemini.eLibrary.DAO.BooksDAO;
 import com.capgemini.eLibrary.DAO.BooksDAOImpl;
-import com.capgemini.eLibrary.dto.Books;
+import com.capgemini.eLibrary.dto.Book;
 import com.capgemini.eLibrary.dto.StaffMember;
 import com.capgemini.eLibrary.forms.AddBooksForm;
 
@@ -31,9 +31,9 @@ public class AddBooksAction extends Action {
         String bookname = addBooksForm.getBookname();
         String author = addBooksForm.getAuthor();
        
-        Books books = new Books(bookname,author);
+        Book book = new Book(bookname,author);
         BooksDAO booksDAO = new BooksDAOImpl() ;
-        booksDAO.addBooks(books);
+        booksDAO.addBooks(book);
        
         ses.setAttribute("bookname", bookname);
         ses.setAttribute("author", author);

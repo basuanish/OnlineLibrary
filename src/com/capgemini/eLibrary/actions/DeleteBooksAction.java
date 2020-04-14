@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.capgemini.eLibrary.DAO.BooksDAO;
 import com.capgemini.eLibrary.DAO.BooksDAOImpl;
-import com.capgemini.eLibrary.dto.Books;
+import com.capgemini.eLibrary.dto.Book;
 import com.capgemini.eLibrary.forms.DeleteBooksForm;
 
 public class DeleteBooksAction extends Action {
@@ -21,12 +21,12 @@ public class DeleteBooksAction extends Action {
 		DeleteBooksForm deleteBooksForm = (DeleteBooksForm)form;
         BooksDAO booksDAO = new BooksDAOImpl();
         
-        Books books= new Books();
+        Book book= new Book();
         try
         {
-        	books.setBookId(deleteBooksForm.getBookId());
+        	book.setBookId(deleteBooksForm.getBookId());
         	int bookId = deleteBooksForm.getBookId();
-        	books=booksDAO.deleteBooksById(bookId);
+        	book=booksDAO.deleteBooksById(bookId);
         	return mapping.findForward("deletion_successful");
         }
         catch (Exception e)

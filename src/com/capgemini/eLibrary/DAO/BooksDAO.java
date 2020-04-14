@@ -1,13 +1,14 @@
 package com.capgemini.eLibrary.DAO;
 
 import java.sql.SQLException;
+import java.util.List;
 
-import com.capgemini.eLibrary.dto.Books;
+import com.capgemini.eLibrary.dto.Book;
 
 public interface BooksDAO {
 
-	String addBooks(Books books) throws SQLException;
-	Books deleteBooksById(int bookId) throws SQLException;
-	Books findById(int staffId)throws SQLException;
-	
+	String addBooks(Book book) throws SQLException;
+	Book deleteBooksById(int bookId) throws SQLException;
+	Book findById(int staffId)throws SQLException;
+	List<Book> findByTitleOrAuthor(Book book) throws SQLException;
 }

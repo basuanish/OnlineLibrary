@@ -21,6 +21,8 @@
         </form-bean>
         <form-bean name="MemberLoginForm" type="com.capgemini.eLibrary.forms.MemberLoginForm">
         </form-bean>
+        <form-bean name="SearchBooksForm" type="com.capgemini.eLibrary.forms.SearchBooksForm">
+        </form-bean>
     </form-beans>
     
     <global-exceptions>
@@ -68,6 +70,11 @@
         <action input="/deletebooks.jsp" name="DeleteBooksForm" path="/deleteBooks" validate = "true"  type="com.capgemini.eLibrary.actions.DeleteBooksAction">
             <forward name="deletion_successful" path="/deleteBooksDetails.jsp" />
             <forward name="deletion_failed" path="/deleteBookError.jsp" />
+        </action>
+        
+        <action input="/searchBooks.jsp" name="SearchBooksForm" path="/SearchBooks" validate = "true"  type="com.capgemini.eLibrary.actions.SearchBooksAction">
+            <forward name="list display successful" path="/bookListDetails.jsp" />
+            <!-- <forward name="list display failed" path="" /> -->
         </action> 
         
     </action-mappings>
