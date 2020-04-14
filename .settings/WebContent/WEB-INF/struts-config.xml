@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="LoginForm" type="com.capgemini.eLibrary.forms.LoginForm">
+        </form-bean>
+        <form-bean name="CreateStaffForm" type="com.capgemini.eLibrary.forms.CreateStaffForm">
+        </form-bean>
+        <form-bean name="ViewStaffForm" type="com.capgemini.eLibrary.forms.ViewStaffForm">
+        </form-bean>
+         <form-bean name="IssueBookForm" type="com.capgemini.eLibrary.forms.IssueBookForm">
+	 </form-bean>
+        <form-bean name="DeleteStaffForm" type="com.capgemini.eLibrary.forms.DeleteStaffForm">
+        </form-bean>
+        <form-bean name="AddBooksForm" type="com.capgemini.eLibrary.forms.AddBooksForm">
+        </form-bean>
+        <form-bean name="MemberLoginForm" type="com.capgemini.eLibrary.forms.MemberLoginForm">
+        </form-bean>
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <action-mappings>
+        <action input="/login.jsp" name="LoginForm" path="/Login" scope="request" type="com.capgemini.eLibrary.actions.LoginAction">
+            <forward name="success" path="/admin.jsp" />
+            <forward name="failure" path="/login.jsp" />
+        </action>
+        
+        <action input="/viewStaff.jsp" name="ViewStaffForm" path="/ViewStaff" scope="session" type="com.capgemini.eLibrary.actions.ViewStaffAction">
+            <forward name="view successful" path="/staffDetails.jsp" />
+            <forward name="view failed" path="/viewStaff.jsp" /> 
+        </action>
+
+        <action input="/deleteStaff.jsp" name="DeleteStaffForm" path="/DeleteStaff" scope="session" type="com.capgemini.eLibrary.actions.DeleteStaffAction">
+            <forward name="deletion successful" path="/deletedStaffDetails.jsp" />
+            <forward name="deletion failed" path="/deleteStaff.jsp" /> 
+        </action>
+
+        <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
+            <forward name="registered" path="/registered.jsp" /> 
+           
+        </action> 
+        
+        <action input="/addBooks.jsp" name="AddBooksForm" path="/addBooks" validate = "true"  type="com.capgemini.eLibrary.actions.AddBooksAction">
+            <forward name="addBooksSucces" path="/addBooksSucces.jsp" />
+             <forward name="addBooksError" path="/bookerrors.jsp" />
+
+        </action> 
+        
+         <action input="/memberLogin.jsp" name="MemberLoginForm" path="/MemberLogin" scope="request" type="com.capgemini.eLibrary.actions.MemberLoginAction">
+            <forward name="success" path="/member.jsp" />
+            <forward name="failure" path="/memberLogin.jsp" />
+        </action>
+        
+        <action input="/issueBook.jsp" name="IssueBookForm" path="/IssueBook" validate = "true"  type="com.capgemini.eLibrary.actions.IssueBookAction">
+            <forward name="success" path="/issueBookSuccess.jsp" />
+             <forward name="failure" path="/issueBook.jsp" />
+
+        </action> 
+        
+        <action input="/deletebooks.jsp" name="DeleteBooksForm" path="/deleteBooks" validate = "true"  type="com.capgemini.eLibrary.actions.DeleteBooksAction">
+            <forward name="deletion_successful" path="/deleteBooksDetails.jsp" />
+            <forward name="deletion_failed" path="/deleteBookError.jsp" />
+        </action> 
+        
+    </action-mappings>
+    
+    <!--controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/-->
+
+    <message-resources parameter="com.capgemini.eLibrary.ApplicationResource"/>
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+	-->
+</struts-config>
