@@ -5,11 +5,18 @@ public class Books {
 
 	private String bookname;
 	private String author;
+	private int bookId;
 
 	
 	
 
 
+	public int getBookId() {
+		return bookId;
+	}
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
 	public String getBookname() {
 		return bookname;
 	}
@@ -30,6 +37,9 @@ public class Books {
 		this.author = author;
 	}
 	
+	public Books() {
+		
+	}
 	
 	
 }

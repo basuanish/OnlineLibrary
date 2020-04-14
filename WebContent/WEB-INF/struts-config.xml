@@ -47,6 +47,11 @@
              <forward name="addBooksError" path="/bookerrors.jsp" />
         </action> 
         
+        <action input="/deletebooks.jsp" name="DeleteBooksForm" path="/deleteBooks" validate = "true"  type="com.capgemini.eLibrary.actions.DeleteBooksAction">
+            <forward name="deletion_successful" path="/deleteBooksDetails.jsp" />
+            <forward name="deletion_failed" path="/deleteBookError.jsp" />
+        </action> 
+        
     </action-mappings>
     
     <!--controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/-->

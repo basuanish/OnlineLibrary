@@ -11,7 +11,7 @@
 <body bgcolor="silver">
 	<table>
        <tr>
-    <td><h1>Not added</h1></td>
+    <td><h1>Successfully deleted</h1></td>
   
 
   </tr>
