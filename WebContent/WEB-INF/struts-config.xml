@@ -39,10 +39,12 @@
         </action>
         <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
             <forward name="registered" path="/registered.jsp" /> 
+           
         </action> 
         
         <action input="/addBooks.jsp" name="AddBooksForm" path="/addBooks" validate = "true"  type="com.capgemini.eLibrary.actions.AddBooksAction">
             <forward name="addBooksSucces" path="/addBooksSucces.jsp" />
+             <forward name="addBooksError" path="/bookerrors.jsp" />
         </action> 
         
     </action-mappings>

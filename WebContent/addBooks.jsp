@@ -16,14 +16,12 @@
 		<html:errors />
 	</div>
 	<html:form action="addBooks" method="get">
-            Serial Number : <html:text property="serialnumber" />
-		<br>
+          
             Book Name : <html:text property="bookname" />
 		<br>
             Author  : <html:text property="author" />
 		<br>
-            Quantity : <html:text property="quantity" />
-		<br>
+
 		<html:submit value="AddBooks" />
 	</html:form>
 	</html:html>

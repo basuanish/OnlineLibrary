@@ -15,22 +15,22 @@ public class BooksDAOImpl implements BooksDAO {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement0 = null, preparedStatement = null;
-		String staffID=null;
+		
 		
 		try {
 			connection = DBUtilis.getConnection();
-			String query = "select * from STAFF_MEMBERS";
+			String query = "select * from Books";
 			preparedStatement0 = connection.prepareStatement(query);
 			ResultSet resultSet = preparedStatement0.executeQuery();
 			int rows = resultSet.getFetchSize()+1;
-			String primaryKey="S"+rows;
 			
-			query = "INSERT INTO Books VALUES (?,?,?,?)";
+			
+			query = "INSERT INTO Books VALUES (?,?)";
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, books.getSerialnumber());
-			preparedStatement.setString(2, books.getBookname());
-			preparedStatement.setString(3, books.getAuthor());
-			preparedStatement.setString(4, books.getQuantity());
+
+			preparedStatement.setString(1, books.getBookname());
+			preparedStatement.setString(2, books.getAuthor());
+	
 		}
 		catch (SQLException exception){
 			throw (exception);
