@@ -27,7 +27,7 @@ public class BooksDAOImpl implements BooksDAO {
 			preparedStatement.setString(1, book.getBookname());
 			preparedStatement.setString(2, book.getAuthor());
 			preparedStatement.setBoolean(3, false);
-			preparedStatement.executeQuery();
+			preparedStatement.executeUpdate();
 
 		} catch (SQLException exception) {
 			throw (exception);

@@ -24,7 +24,6 @@ public class MemberLoginAction extends org.apache.struts.action.Action {
     	//HttpSession ses = request.getSession(true);
         MemberLoginForm loginForm = (MemberLoginForm)form;
         MemberLoginDAO dao = new MemberLoginDAOImpl();
-        String loginStatus = "failure";
         
         try
         {
