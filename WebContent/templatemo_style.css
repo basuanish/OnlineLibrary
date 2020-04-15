@@ -37,3 +37,8 @@ Credit: http://www.templatemo.com
 	
 }
 
+#table_content {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+

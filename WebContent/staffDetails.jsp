@@ -1,10 +1,41 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<html>
+<body>
+	<h1 align="center">Staff Member Details</h1>
 
-New staff member added with the given details:<br>
-ID : <bean:write scope="session" name="staffMember" property="staffID" filter="false" /><br>
-Name : <bean:write scope="session" name="staffMember" property="name" filter="false" /><br>
-Username : <bean:write scope="session" name="staffMember" property="username" filter="false" /><br>
-Phone No : <bean:write scope="session" name="staffMember" property="phoneNo" filter="false" /><br>
-Address : <bean:write scope="session" name="staffMember" property="address" filter="false" /><br>
-Designation : <bean:write scope="session" name="staffMember" property="designation" filter="false" /><br>
+	<table align="center" cellspacing="20">
+		<tr>
+			<td>ID :</td>
+			<td><bean:write scope="session" name="staffMember"
+					property="staffID" /></td>
+		</tr>
+		<tr>
+			<td>Name :</td>
+			<td><bean:write scope="session" name="staffMember"
+					property="name" /></td>
+		</tr>
+		<tr>
+			<td>User Name :</td>
+			<td><bean:write scope="session" name="staffMember"
+					property="username" /></td>
+		</tr>
+
+		<tr>
+			<td>Phone No :</td>
+			<td><bean:write scope="session" name="staffMember"
+					property="phoneNo" /></td>
+		</tr>
+		<tr>
+			<td>Address :</td>
+			<td><bean:write scope="session" name="staffMember"
+					property="address" /></td>
+		</tr>
+		<tr>
+			<td>Designation :</td>
+			<td><bean:write scope="session" name="staffMember"
+					property="designation" /></td>
+		</tr>
+	</table>
+</body>
+</html>
