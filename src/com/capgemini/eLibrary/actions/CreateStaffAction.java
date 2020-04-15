@@ -55,7 +55,8 @@ public class CreateStaffAction extends Action{
         	session.setAttribute("staffMember", newStaff);
         	return mapping.findForward("registered");
         }catch(Exception exception) {
-        	throw new Exception(exception.getMessage());
+        	session.setAttribute("errorMsg", exception.getMessage());
+        	return mapping.findForward("could not register");
         }
 	}
 }

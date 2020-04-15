@@ -30,11 +30,14 @@ public class SearchBooksAction extends Action {
 		List<Book> books;
 		try {
 			books = booksDAO.findByTitleOrAuthor(searchBook);
+			if(books.size()==0)
+				throw new Exception("No books found with the given criteria!!!");
 			for(Book b:books)
 				System.out.println(b);
 			session.setAttribute("books", books);
 			return mapping.findForward("list display successful");
-		} catch (Exception e) {
+		} catch (Exception exception) {
+			session.setAttribute("errorMsg", exception.getMessage());
 			return mapping.findForward("list display failed");
 		}
 	}

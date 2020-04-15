@@ -39,5 +39,12 @@
 	<div style="color: red" align="center">
 		<html:errors />
 	</div>
+	<%
+		if (request.getAttribute("errorMsg") != null) {
+				out.print("<div>");
+				out.print("<font color='red'><font size='4'>" + request.getAttribute("errorMsg"));
+				out.print("</div>");
+			}
+	%>
 </body>
 </html:html>
