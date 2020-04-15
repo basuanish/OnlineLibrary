@@ -8,23 +8,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
-<title>Login Page</title>
+<title>Search Books Page</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<h1 align="center">Search Books</h1>
+	<h1 align="center"> <font color="blue">Search Books</font></h1>
 	<div id="templatemo_content">
 		<div id="content-box">
 
 			<html:form action="/SearchBooks">
 				<table height="230" align="center" cellspacing="10" cellpadding="8">
-					<%
-						if (request.getAttribute("errorMsg") != null) {
-									out.print("<div>");
-									out.print("<font color='red'><font size='4'>" + request.getAttribute("errorMsg"));
-									out.print("</div>");
-								}
-					%>
+
 					<tr>
 						<td>Book Name :</td>
 						<td><html:text name="SearchBooksForm" property="bookname" /></td>
@@ -46,6 +40,12 @@
 	<div style="color: red" align="center">
 		<html:errors />
 	</div>
-
+	<%
+		if (request.getAttribute("errorMsg") != null) {
+				out.print("<div align=\"center\">");
+				out.print("<font color='red'><font size='4'>" + request.getAttribute("errorMsg"));
+				out.print("</div>");
+			}
+	%>
 </body>
 </html:html>

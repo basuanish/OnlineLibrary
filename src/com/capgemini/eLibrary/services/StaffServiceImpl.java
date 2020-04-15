@@ -16,9 +16,10 @@ public class StaffServiceImpl implements StaffService {
 	public boolean checkUsernameForStaff(StaffMember staffMember) throws BackendException {
 		StaffDAO staffDAO = new StaffDAOImpl();
 		String username = staffMember.getUsername();
-		boolean staffExists=true;
+		boolean staffExists=true;	
 		try {
 			staffExists = staffDAO.existsByUsername(username);
+			System.out.println(staffExists);
 		}catch(SQLException exception) {
 			throw new BackendException("Backend exception : "+exception.getMessage());
 		}

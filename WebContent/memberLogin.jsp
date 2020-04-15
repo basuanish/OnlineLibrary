@@ -13,9 +13,9 @@
 <body>
 <%@ include file="header.jsp" %>
 
-			<%
-				out.print("<h1><font color=blue>WELCOME TO MEMBER LOGIN</h1>");
-			%>
+			<h1 align="center">
+		<font color="blue">Welcome to Member Login</font>
+	</h1>
 			<html:form action="/MemberLogin">
 				<table height="230" align="center" cellspacing="10" cellpadding="8">
 				 <%if(request.getAttribute("exception")!=null)

@@ -3,9 +3,10 @@
 <html>
 <head>
 <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+<title>Book List Details</title>
 </head>
 <body>
-	<h1>Books according to the given search criteria:</h1>
+	<h1 align="center">Books according to the given search criteria:</h1>
 	<br>
 	<div id="templatemo_content">
 		<div id="content-box">

@@ -37,7 +37,7 @@ public class SearchBooksAction extends Action {
 			session.setAttribute("books", books);
 			return mapping.findForward("list display successful");
 		} catch (Exception exception) {
-			session.setAttribute("errorMsg", exception.getMessage());
+			request.setAttribute("errorMsg", exception.getMessage());
 			return mapping.findForward("list display failed");
 		}
 	}

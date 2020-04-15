@@ -25,11 +25,13 @@ public class CreateStaffAction extends Action{
 		newStaff.setName(createStaffForm.getName());
         
 		newStaff.setUsername(createStaffForm.getUsername());
+		System.out.println(newStaff.getUsername());
         try {
 	        if(staffService.checkUsernameForStaff(newStaff))
 	        	throw new Exception("Username already exists!!!");
         }catch(Exception exception) {
-        	session.setAttribute("errorMsg", exception.getMessage());
+        	System.out.println(exception.getMessage());
+        	request.setAttribute("errorMsg", exception.getMessage());
         	return mapping.findForward("could not register");
         }
         
@@ -38,12 +40,11 @@ public class CreateStaffAction extends Action{
 	        if(staffService.checkPhoneNoForStaff(newStaff))
 	        	throw new Exception("PhoneNo already exists!!!");
         }catch(Exception exception) {
-        	session.setAttribute("errorMsg", exception.getMessage());
+        	request.setAttribute("errorMsg", exception.getMessage());
         	return mapping.findForward("could not register");
         }
         
         newStaff.setPassword(createStaffForm.getPassword());
-        
         newStaff.setAddress(createStaffForm.getAddress());
         newStaff.setDesignation(createStaffForm.getDesignation());
         
@@ -53,7 +54,7 @@ public class CreateStaffAction extends Action{
         	session.setAttribute("staffMember", newStaff);
         	return mapping.findForward("registered");
         }catch(Exception exception) {
-        	session.setAttribute("errorMsg", exception.getMessage());
+        	request.setAttribute("errorMsg", exception.getMessage());
         	return mapping.findForward("could not register");
         }
 	}

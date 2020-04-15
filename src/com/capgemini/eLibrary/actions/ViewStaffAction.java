@@ -25,16 +25,17 @@ public class ViewStaffAction extends Action{
         StaffService staffService = new StaffServiceImpl();
         
         StaffMember staffMember= new StaffMember();
+        staffMember.setStaffID(viewStaffForm.getStaffID());
+        System.out.println(staffMember);
         try
         {
-        	staffMember.setStaffID(viewStaffForm.getStaffID());
         	staffMember=staffService.fetchStaff(staffMember);
         	session.setAttribute("staffMember", staffMember);
         	return mapping.findForward("view successful");
         }
         catch (Exception exception)
         {
-        	session.setAttribute("errorMsg",exception.getMessage());
+        	request.setAttribute("errorMsg",exception.getMessage());
         	return mapping.findForward("view failed");
         }
     }

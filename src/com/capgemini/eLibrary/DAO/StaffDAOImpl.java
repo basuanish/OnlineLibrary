@@ -102,7 +102,6 @@ public class StaffDAOImpl implements StaffDAO {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-
 			connection = DBUtilis.getInstance().getConnection();
 			String query = "INSERT INTO STAFF_MEMBERS (STAFF_NAME, USER_NAME, PASS, PHONENO, ADDRESS, DESIGNATION) VALUES (?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(query);
@@ -116,10 +115,8 @@ public class StaffDAOImpl implements StaffDAO {
 		} catch (SQLException exception) {
 			throw (exception);
 		} finally {
-
 			preparedStatement.close();
 			connection.close();
-
 		}
 	}
 

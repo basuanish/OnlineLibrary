@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
-<title>Login Page</title>
+<title>Create Staff Page</title>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -64,7 +64,7 @@
 	</div>
 	<%
 		if (request.getAttribute("errorMsg") != null) {
-				out.print("<div>");
+				out.print("<div align=\"center\">");
 				out.print("<font color='red'><font size='4'>" + request.getAttribute("errorMsg"));
 				out.print("</div>");
 			}

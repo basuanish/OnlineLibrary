@@ -18,7 +18,7 @@ public class DeleteStaffForm extends ActionForm {
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors actionErrors = new ActionErrors();
 		if (staffID < 1)
-			actionErrors.add("staffID",new ActionMessage("error.staffID.invalid"));
+			actionErrors.add("staffID",new ActionMessage("error.staffID.required"));
 		return actionErrors;
 	}
 

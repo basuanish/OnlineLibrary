@@ -2,6 +2,7 @@
 <%@taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 
 <html>
+<title>Deleted Staff Details Page</title>
 <body>
 	<h1 align="center">Staff member with the given details was
 		deleted:</h1>

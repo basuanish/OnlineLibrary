@@ -11,18 +11,16 @@
 <title>Login Page</title>
 </head>
 <body>
-<%@ include file="header.jsp" %>
-
-
-			<%
-				out.print("<h1><font color=blue>WELCOME TO ADMINISTRATION LOGIN</h1>");
-			%>
+<%@ include file="header.jsp"%>
+	<h1 align="center">
+		<font color="blue">Welcome to Administration Login</font>
+	</h1>
 			<html:form action="/Login">
 				<table height="230" align="center" cellspacing="10" cellpadding="8">
 				 <%if(request.getAttribute("exception")!=null)
 			{
-			out.print("<div>");
-			out.print("<font color='blue'><font size='4'>"+request.getAttribute("exception")+"");
+			out.print("<div align='center'>");
+			out.print("<font color='red'><font size='4'>"+request.getAttribute("exception")+"");
 			
 			out.print("</div>"); 
 			}
@@ -43,7 +41,7 @@
 					</tr>
 				</table>
 			</html:form>
-			<div style="color:red">
+			<div style="color:red" align="center">
     <html:errors />
     </div>
 		
