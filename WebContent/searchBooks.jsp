@@ -18,6 +18,13 @@
 
 			<html:form action="/SearchBooks">
 				<table height="230" align="center" cellspacing="10" cellpadding="8">
+					<%
+						if (request.getAttribute("errorMsg") != null) {
+									out.print("<div>");
+									out.print("<font color='red'><font size='4'>" + request.getAttribute("errorMsg"));
+									out.print("</div>");
+								}
+					%>
 					<tr>
 						<td>Book Name :</td>
 						<td><html:text name="SearchBooksForm" property="bookname" /></td>
@@ -39,12 +46,6 @@
 	<div style="color: red" align="center">
 		<html:errors />
 	</div>
-	<%
-		if (request.getAttribute("errorMsg") != null) {
-				out.print("<div>");
-				out.print("<font color='red'><font size='4'>" + request.getAttribute("errorMsg"));
-				out.print("</div>");
-			}
-	%>
+
 </body>
 </html:html>

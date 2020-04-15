@@ -29,7 +29,8 @@ public class CreateStaffAction extends Action{
 	        if(staffService.checkUsernameForStaff(newStaff))
 	        	throw new Exception("Username already exists!!!");
         }catch(Exception exception) {
-        	throw new Exception(exception.getMessage());
+        	session.setAttribute("errorMsg", exception.getMessage());
+        	return mapping.findForward("could not register");
         }
         
         newStaff.setPhoneNo(createStaffForm.getPhoneNo());
@@ -37,14 +38,11 @@ public class CreateStaffAction extends Action{
 	        if(staffService.checkPhoneNoForStaff(newStaff))
 	        	throw new Exception("PhoneNo already exists!!!");
         }catch(Exception exception) {
-        	throw new Exception(exception.getMessage());
+        	session.setAttribute("errorMsg", exception.getMessage());
+        	return mapping.findForward("could not register");
         }
         
         newStaff.setPassword(createStaffForm.getPassword());
-        String confirmPassword = createStaffForm.getRepassword();
-        if(!newStaff.getPassword().equals(confirmPassword)) {
-        	throw new Exception("Passwords do not match!!!");
-        }
         
         newStaff.setAddress(createStaffForm.getAddress());
         newStaff.setDesignation(createStaffForm.getDesignation());
