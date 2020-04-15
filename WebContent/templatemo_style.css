@@ -1,0 +1,44 @@
+/*
+Credit: http://www.templatemo.com
+*/
+
+
+
+#content-box{
+	text-align:center;
+	margin:auto;
+	float:auto;
+}
+
+#templatemo_wrapper {
+	width: 980px;
+	margin: 0 auto;
+	
+}
+#templatemo_content {
+	float:auto;
+	margin:0 auto;
+	width:500px;
+}
+
+
+#templatemo_menu_wrapper {
+	width: 100%;
+	height: 90px;
+	margin: 0 auto;
+	bgcolor:#ffffff;
+}
+
+#templatemo_menu {
+	width: 920px;
+	height: 90px;
+	margin: 0 auto;
+	padding: 0 30px;
+	
+}
+
+#table_content {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
