@@ -43,12 +43,12 @@ public class AddBooksForm extends ActionForm {
 		
 	
 		
-		if(bookname==null)
+		if(bookname==null | bookname.equals(""))
 			ae.add("bookname", new ActionMessage("error.bookname.required"));
 		
 
 		
-		if(author==null)
+		if(author==null | author.equals(""))
 			ae.add("author", new ActionMessage("error.author.required"));
 		
 

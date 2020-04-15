@@ -23,7 +23,7 @@
 					<td><a href="issueBook.jsp"> Click to issue new book </a></td>
 				</tr>
 				<tr>
-					<td><a href="showBookDetails.jsp"> Click to see book
+					<td><a href="searchBooks.jsp"> Click to see book
 							details </a></td>
 				</tr>
 			</table>

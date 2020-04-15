@@ -32,17 +32,16 @@ public class AddBooksAction extends Action {
         String author = addBooksForm.getAuthor();
        
         Book book = new Book(bookname,author);
-        BooksDAO booksDAO = new BooksDAOImpl() ;
+        BooksDAO booksDAO = new BooksDAOImpl();
+        try {
         booksDAO.addBooks(book);
        
         ses.setAttribute("bookname", bookname);
         ses.setAttribute("author", author);
-        
-        if (bookname.equals("") || bookname.equals("")){
-            return mapping.findForward("addBooksError");
-        }
-
         return mapping.findForward("addBooksSucces");
-	
+        }
+       catch(SQLException e) {
+    	   return mapping.findForward("addBooksError");
+       }
 	}
 	}

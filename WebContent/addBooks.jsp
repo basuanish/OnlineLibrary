@@ -1,20 +1,23 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
+<!DOCTYPE html>
+<html:html>
 <head>
+<meta charset="ISO-8859-1">
+<link href="styles.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Books Page</title>
 </head>
 <body>
-	<html:html>
-	<div style="color: red">
-		<html:errors />
-	</div>
+<%@ include file="header.jsp" %>
+
+
+			<%
+				out.print("<h1><font color=blue>WELCOME TO ADMINISTRATION LOGIN</h1>");
+			%>
+	
 	<html:form action="addBooks" method="get">
 	
 	        
@@ -26,6 +29,9 @@
 
 		<html:submit value="AddBooks" />
 	</html:form>
+	<div style="color: red">
+		<html:errors />
+	</div>
 	</html:html>
 </body>
-</html>
+

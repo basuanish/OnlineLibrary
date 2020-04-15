@@ -6,22 +6,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="styles.css" rel="stylesheet" type="text/css" />
 <title>Issue Book</title>
 </head>
 <body>
 <body>
 	<%@ include file="header.jsp"%>
 
-	<div id="templatemo_content">
-		<div id="content-box">
+
 
 			<%
 				out.print("<h1><font color=blue>Issue Book</h1>");
 			%>
-			<div style="color: red">
-				<html:errors />
-			</div>
+
 			<html:form action="/IssueBook">
 				<table width="300" height="250" cellspacing="5" cellpadding="3"
 					align="center">
@@ -46,5 +43,9 @@
 					</tr>
 				</table>
 			</html:form>
+			<div style="color: red">
+				<html:errors />
+			</div>
+		
 </body>
 </html>

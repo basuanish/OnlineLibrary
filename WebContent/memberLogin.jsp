@@ -7,16 +7,11 @@
 <html:html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="styles.css" rel="stylesheet" type="text/css" />
 <title>Login Page</title>
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<div style="color:red">
-    <html:errors />
-    </div>
-<div id="templatemo_content">
-		<div id="content-box">
 
 			<%
 				out.print("<h1><font color=blue>WELCOME TO MEMBER LOGIN</h1>");
@@ -47,7 +42,9 @@
 					</tr>
 				</table>
 			</html:form>
-		</div>
-		</div>
+			<div style="color:red" align="center">
+    <html:errors />
+    </div>
+		
 </body>
 </html:html>
