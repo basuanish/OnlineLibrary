@@ -47,7 +47,7 @@
 
         <action input="/createStaff.jsp" name="CreateStaffForm" path="/CreateStaff" scope="session" type="com.capgemini.eLibrary.actions.CreateStaffAction">
             <forward name="registered" path="/registered.jsp" /> 
-           
+           	<forward name="could not register" path="/createStaff.jsp" />
         </action> 
         
         <action input="/addBooks.jsp" name="AddBooksForm" path="/addBooks" validate = "true"  type="com.capgemini.eLibrary.actions.AddBooksAction">
@@ -74,7 +74,7 @@
         
         <action input="/searchBooks.jsp" name="SearchBooksForm" path="/SearchBooks" validate = "true"  type="com.capgemini.eLibrary.actions.SearchBooksAction">
             <forward name="list display successful" path="/bookListDetails.jsp" />
-            <!-- <forward name="list display failed" path="" /> -->
+            <forward name="list display failed" path="/searchBooks.jsp" />
         </action> 
         
     </action-mappings>

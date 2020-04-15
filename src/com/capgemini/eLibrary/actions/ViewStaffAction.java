@@ -32,8 +32,9 @@ public class ViewStaffAction extends Action{
         	session.setAttribute("staffMember", staffMember);
         	return mapping.findForward("view successful");
         }
-        catch (Exception e)
+        catch (Exception exception)
         {
+        	session.setAttribute("errorMsg",exception.getMessage());
         	return mapping.findForward("view failed");
         }
     }

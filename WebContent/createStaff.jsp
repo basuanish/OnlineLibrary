@@ -20,6 +20,7 @@
 
 			<html:form action="/CreateStaff">
 				<table align="center" cellspacing="20">
+
 					<tr>
 						<td>Name :</td>
 						<td><html:text name="CreateStaffForm" property="name" /></td>
@@ -61,5 +62,12 @@
 	<div style="color: red" align="center">
 		<html:errors />
 	</div>
+	<%
+		if (request.getAttribute("errorMsg") != null) {
+				out.print("<div>");
+				out.print("<font color='red'><font size='4'>" + request.getAttribute("errorMsg"));
+				out.print("</div>");
+			}
+	%>
 </body>
 </html:html>
