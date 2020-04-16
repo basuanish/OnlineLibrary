@@ -6,15 +6,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add Books Successful Page</title>
+<title>Delete Books Successful Page</title>
 </head>
-<body bgcolor="silver">
-	<table>
-       <tr>
-    <td><h1>Successfully deleted</h1></td>
-  
+<body>
+	<h1 align="center">Delete Books Successful. Book Details:</h1>
+	<table align="center" cellspacing="20">
 
-  </tr>
+		<%
+			out.print("<tr><th>BOOK NAME</th><th>AUTHOR</th></tr>");
+			out.print("<tr>");
+
+			
+			out.print("<td>" + request.getAttribute("bookname") + "</td>");
+			out.print("<td>" + request.getAttribute("author") + "</td>");
+			out.print("</tr>");
+		%>
+
 	</table>
 </body>
 </html>
