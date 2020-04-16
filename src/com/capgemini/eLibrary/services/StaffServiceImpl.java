@@ -21,7 +21,7 @@ public class StaffServiceImpl implements StaffService {
 			staffExists = staffDAO.existsByUsername(username);
 			System.out.println(staffExists);
 		}catch(SQLException exception) {
-			throw new BackendException("Backend exception : "+exception.getMessage());
+			throw new BackendException(exception.getMessage());
 		}
 		return staffExists;
 	}
@@ -34,7 +34,7 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffExists = staffDAO.existsByUsername(phoneNo);
 		}catch(SQLException exception) {
-			throw new BackendException("Backend exception : "+exception.getMessage());
+			throw new BackendException(exception.getMessage());
 		}
 		return staffExists;
 	}
@@ -45,7 +45,7 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffMember=staffDAO.createStaff(staffMember);
 		}catch(SQLException exception) {
-			throw new StaffCreationException("StaffCreationException : "+exception.getMessage());
+			throw new StaffCreationException(exception.getMessage());
 		}
 		return staffMember;
 	}
@@ -58,9 +58,9 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffMember = staffDAO.findById(staffID);
 			if(staffMember==null)
-				throw new StaffFetchingException("StaffFetchingException : The typed ID does not exist!!!");
+				throw new StaffFetchingException("The typed ID does not exist!!!");
 		}catch(SQLException exception) {
-			throw new StaffFetchingException("StaffFetchingException : "+exception.getMessage());
+			throw new StaffFetchingException(exception.getMessage());
 		}
 		return staffMember;
 	}
@@ -73,9 +73,9 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffMember = staffDAO.deleteById(staffID);
 			if(staffMember==null)
-				throw new StaffDeletionException("StaffDeletionException : The typed ID does not exist!!!");
+				throw new StaffDeletionException("The typed ID does not exist!!!");
 		}catch(SQLException exception) {
-			throw new StaffDeletionException("StaffDeletionException : "+exception.getMessage());
+			throw new StaffDeletionException(exception.getMessage());
 		}
 		return staffMember;
 	}
