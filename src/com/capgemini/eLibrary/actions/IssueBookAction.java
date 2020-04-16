@@ -12,12 +12,9 @@ import org.apache.struts.action.ActionMapping;
 
 import com.capgemini.eLibrary.DAO.IssueBookDAO;
 import com.capgemini.eLibrary.DAO.IssueBookDAOImpl;
-import com.capgemini.eLibrary.DAO.LoginDAO;
-import com.capgemini.eLibrary.DAO.LoginDAOImpl;
 import com.capgemini.eLibrary.dto.BookEntity;
 import com.capgemini.eLibrary.exceptions.InvalidBookException;
 import com.capgemini.eLibrary.forms.IssueBookForm;
-import com.capgemini.eLibrary.forms.LoginForm;
 
 public class IssueBookAction extends org.apache.struts.action.Action{
 	
