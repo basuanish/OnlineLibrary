@@ -23,14 +23,7 @@
 				<table width="300" height="250" cellspacing="5" cellpadding="3"
 					align="center">
 
-					<%
-						if (request.getAttribute("exception") != null) {
-								out.print("<div>");
-								out.print("<font color='blue'><font size='4'>" + request.getAttribute("exception") + "");
-
-								out.print("</div>");
-							}
-					%>
+					
 					<tr>
 						<td>BOOK ID:</td>
 						<td><html:text name="DeleteBooksForm" property="bookId" /></td>
@@ -41,6 +34,14 @@
 						<td><html:submit value="Submit" /> <INPUT TYPE=RESET
 							VALUE="CLEAR"></td>
 					</tr>
+					<%
+						if (request.getAttribute("exception") != null) {
+								out.print("<div>");
+								out.print("<font color='red'><font size='4'>" + request.getAttribute("exception") + "");
+
+								out.print("</div>");
+							}
+					%>
 				</table>
 			</html:form>
 			<div style="color: red">

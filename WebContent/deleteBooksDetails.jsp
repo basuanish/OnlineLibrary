@@ -6,15 +6,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add Books Successful Page</title>
+<title>Delete Books Successful Page</title>
 </head>
-<body bgcolor="silver">
-	<table>
-       <tr>
-    <td><h1>Successfully deleted</h1></td>
-  
+<body>
+	<h1 align="center">Delete Books Successful. Book Details:</h1>
+	<table align="center" cellspacing="20">
+	
 
-  </tr>
+		
+		<tr>
+		<td><h3>Bookname:</h3></td>
+			<td><%=session.getAttribute("bookname")%></td>
+		</tr>
+		<tr>
+		<td><h3>Author:</h3></td>
+			<td><%=session.getAttribute("author")%></td>
+		</tr>
 	</table>
 </body>
 </html>
