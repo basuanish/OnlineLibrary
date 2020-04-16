@@ -47,6 +47,7 @@ public class BooksDAOImpl implements BooksDAO {
 		Book booksDeleted = null;
 		try {
 			booksDeleted = findById(bookId);
+			System.out.println("books to be deleted" + booksDeleted);
 		} catch (SQLException exception) {
 			throw (exception);
 		}
@@ -93,6 +94,7 @@ public class BooksDAOImpl implements BooksDAO {
 			preparedStatement.close();
 			connection.close();
 		}
+		System.out.println("retrieved book" + book);
 		return book;
 	}
 

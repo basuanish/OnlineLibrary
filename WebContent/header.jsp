@@ -16,7 +16,7 @@
                     <li><a href="login.jsp">Administrator</a></li>
                     <li><a href="memberLogin.jsp">Library Member</a></li>
                     <li><a href="searchBooks.jsp">Book Details</a></li>
-                    <li><a href="deletebooks.jsp">Delete Books</a></li>
+                  
                 </ul>    	
      
    

@@ -18,6 +18,7 @@
 			<tr><td><a href="deleteStaff.jsp"> Delete a staff member </a></td></tr>
 			<tr><td><a href="searchBooks.jsp"> Show Book details </a></td></tr>
 			<tr><td><a href="addBooks.jsp"> Add new Book</a></td></tr>
+			<tr><td><a href="deletebooks.jsp">Delete Books</a></td></tr>
 
 			
 	</table>
