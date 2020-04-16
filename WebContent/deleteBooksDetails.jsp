@@ -11,17 +11,17 @@
 <body>
 	<h1 align="center">Delete Books Successful. Book Details:</h1>
 	<table align="center" cellspacing="20">
-	
 
-		
-		<tr>
-		<td><h3>Bookname:</h3></td>
-			<td><%=session.getAttribute("bookname")%></td>
-		</tr>
-		<tr>
-		<td><h3>Author:</h3></td>
-			<td><%=session.getAttribute("author")%></td>
-		</tr>
+		<%
+			out.print("<tr><th>BOOK NAME</th><th>AUTHOR</th></tr>");
+			out.print("<tr>");
+
+			
+			out.print("<td>" + request.getAttribute("bookname") + "</td>");
+			out.print("<td>" + request.getAttribute("author") + "</td>");
+			out.print("</tr>");
+		%>
+
 	</table>
 </body>
 </html>

@@ -36,12 +36,12 @@ public class DeleteBooksAction extends Action {
         	System.out.println("book returned" + book);
         	try {
         		book=booksDAO.deleteBooksById(deleteBooksForm);
-        		ses.setAttribute("bookname", book.getBookname());
-        		ses.setAttribute("author", book.getAuthor());
+        		request.setAttribute("bookname", book.getBookname());
+        		request.setAttribute("author", book.getAuthor());
         		return mapping.findForward("deletion_successful");
         	}
         	catch(SQLException|DeleteBooksException e){
-        		ses.setAttribute("exception", e.getMessage());
+        		request.setAttribute("exception", e.getMessage());
         		return mapping.findForward("deletion_failed");
         	}
         	

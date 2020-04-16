@@ -35,9 +35,7 @@ public class BooksDAOImpl implements BooksDAO {
 			throw (exception);
 		} finally {
 
-//			DBUtilis.closePreparedStatement(preparedStatement);
-//			DBUtilis.closePreparedStatement(preparedStatement0);
-//			DBUtilis.closeConnection(connection);
+
 			preparedStatement.close();
 			connection.close();
 		}
@@ -51,14 +49,21 @@ public class BooksDAOImpl implements BooksDAO {
 		PreparedStatement preparedStatement = null;
 		int bookId=Integer.parseInt(deleteBooksForm.getBookId());
 		try {
-			booksDeleted = findById(bookId);
-			System.out.println("books to be deleted" + booksDeleted);
-			if (booksDeleted != null) {
-				connection = DBUtilis.getInstance().getConnection();
-				String query = "delete from Books where bookId=?";
-				preparedStatement = connection.prepareStatement(query);
+			connection = DBUtilis.getInstance().getConnection();
+			String query = "select * from Books where bookId=?";
+			preparedStatement = connection.prepareStatement(query);
+			System.out.println("Bookid"+bookId);
+			preparedStatement.setInt(1, bookId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+			
+				
+				String query1 = "delete from Books where bookId=?";
+				preparedStatement = connection.prepareStatement(query1);
 				preparedStatement.setInt(1, bookId);
-				preparedStatement.executeUpdate();
+				int rowsAffected=preparedStatement.executeUpdate();
+				System.out.println(rowsAffected);
 			} else {
 				throw new DeleteBooksException("Invalid Id");
 			}

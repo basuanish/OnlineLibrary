@@ -24,7 +24,7 @@
 			<html:form action="/deleteBooks">
 				<table height="230" align="center" cellspacing="10" cellpadding="8">
 					<tr>
-						<td>Staff ID :</td>
+						<td>Book Id :</td>
 						<td><html:text name="DeleteBooksForm" property="bookId" /></td>
 					</tr>
 					
