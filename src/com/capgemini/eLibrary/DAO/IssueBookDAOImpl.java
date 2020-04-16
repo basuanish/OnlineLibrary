@@ -24,7 +24,7 @@ public class IssueBookDAOImpl implements IssueBookDAO {
 			String query = "select * from Books where bookId=? and issued=?";
 			preparedStatement = connection.prepareStatement(query);
 			int bookID=Integer.parseInt(form.getBookId());
-			System.out.println("Booid"+bookID);
+			System.out.println("Bookid"+bookID);
 			preparedStatement.setInt(1, bookID);
 			preparedStatement.setBoolean(2, false);
 			ResultSet resultSet = preparedStatement.executeQuery();

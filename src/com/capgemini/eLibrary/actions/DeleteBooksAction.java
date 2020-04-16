@@ -22,17 +22,18 @@ public class DeleteBooksAction extends Action {
         BooksDAO booksDAO = new BooksDAOImpl();
         
         Book book= new Book();
-        try
-        {
-        	book.setBookId(deleteBooksForm.getBookId());
-        	int bookId = deleteBooksForm.getBookId();
+       
+
+        	int bookId = Integer.parseInt(deleteBooksForm.getBookId());
+        	System.out.println(bookId);
         	book=booksDAO.deleteBooksById(bookId);
+        	System.out.println("book returned" + book);
+        	if(book != null)
         	return mapping.findForward("deletion_successful");
-        }
-        catch (Exception e)
-        {
+        	else
         	return mapping.findForward("deletion_failed");
-        }
+        		
+       
 	}
 	
 }
