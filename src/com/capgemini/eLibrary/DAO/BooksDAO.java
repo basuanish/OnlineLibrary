@@ -8,7 +8,6 @@ import com.capgemini.eLibrary.exceptions.DeleteBooksException;
 import com.capgemini.eLibrary.forms.DeleteBooksForm;
 
 public interface BooksDAO {
-
 	String addBooks(Book book) throws SQLException;
 	Book deleteBooksById(DeleteBooksForm deleteBooksForm) throws SQLException, DeleteBooksException;
 	Book findById(int staffId)throws SQLException;

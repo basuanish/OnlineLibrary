@@ -13,7 +13,6 @@ import com.capgemini.eLibrary.forms.DeleteBooksForm;
 import com.capgemini.eLibrary.utils.DBUtilis;
 
 public class BooksDAOImpl implements BooksDAO {
-
 	@Override
 	public String addBooks(Book book) throws SQLException {
 
@@ -35,7 +34,6 @@ public class BooksDAOImpl implements BooksDAO {
 			throw (exception);
 		} finally {
 
-
 			preparedStatement.close();
 			connection.close();
 		}
@@ -47,22 +45,21 @@ public class BooksDAOImpl implements BooksDAO {
 		Book booksDeleted = new Book();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		int bookId=Integer.parseInt(deleteBooksForm.getBookId());
+		int bookId = Integer.parseInt(deleteBooksForm.getBookId());
 		try {
 			connection = DBUtilis.getInstance().getConnection();
 			String query = "select * from Books where bookId=?";
 			preparedStatement = connection.prepareStatement(query);
-			System.out.println("Bookid"+bookId);
+			System.out.println("Bookid" + bookId);
 			preparedStatement.setInt(1, bookId);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
-			
-				
+
+			if (resultSet.next()) {
+
 				String query1 = "delete from Books where bookId=?";
 				preparedStatement = connection.prepareStatement(query1);
 				preparedStatement.setInt(1, bookId);
-				int rowsAffected=preparedStatement.executeUpdate();
+				int rowsAffected = preparedStatement.executeUpdate();
 				System.out.println(rowsAffected);
 			} else {
 				throw new DeleteBooksException("Invalid Id");
@@ -90,7 +87,7 @@ public class BooksDAOImpl implements BooksDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-				
+
 				book.setBookId(resultSet.getInt(1));
 				book.setBookname(resultSet.getString(2));
 				book.setAuthor(resultSet.getString(3));
