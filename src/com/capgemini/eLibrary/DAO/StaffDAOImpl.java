@@ -16,26 +16,29 @@ public class StaffDAOImpl implements StaffDAO {
 		PreparedStatement preparedStatement = null;
 		boolean staffExists = false;
 		try {
-
 			connection = DBUtilis.getInstance().getConnection();
-
+			connection.setAutoCommit(false);
 			String query = "select * from STAFF_MEMBERS where USER_NAME=?";
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setString(1, username);
 			ResultSet resultSet = preparedStatement.executeQuery();
-
+			connection.commit();
 			if (resultSet.next()) {
 				staffExists = true;
 			}
 		} catch (SQLException exception) {
-			throw (exception);
+			try{
+				 if(connection!=null) {
+		            connection.rollback();
+				 }
+				 throw exception;
+		      }catch(SQLException exception2){
+		         throw exception;
+		      }
 		} finally {
-
-//			DBUtilis.closePreparedStatement(preparedStatement);
 			preparedStatement.close();
 			connection.close();
-
 		}
 		return staffExists;
 	}
@@ -47,25 +50,28 @@ public class StaffDAOImpl implements StaffDAO {
 		boolean staffExists = false;
 
 		try {
-
 			connection = DBUtilis.getInstance().getConnection();
+			connection.setAutoCommit(false);
 			String query = "select * from STAFF_MEMBERS where PHONENO=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, phoneNo);
 			ResultSet rs = preparedStatement.executeQuery();
-
+			connection.commit();
 			if (rs.next()) {
 				staffExists = true;
 			}
 		} catch (SQLException exception) {
-			throw (exception);
+			try{
+				 if(connection!=null) {
+		            connection.rollback();
+				 }
+				 throw exception;
+		      }catch(SQLException exception2){
+		         throw exception;
+		      }
 		} finally {
-
-//			DBUtilis.closePreparedStatement(preparedStatement);
-//			DBUtilis.closeConnection(connection);
 			preparedStatement.close();
 			connection.close();
-
 		}
 		return staffExists;
 	}
@@ -82,15 +88,24 @@ public class StaffDAOImpl implements StaffDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = DBUtilis.getInstance().getConnection();
+			connection.setAutoCommit(false);
 			String query = "select * from STAFF_MEMBERS where USER_NAME=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, staffMember.getUsername());
 			ResultSet rs = preparedStatement.executeQuery();
+			connection.commit();
 			if (rs.next()) {
 				staffMember.setStaffID(rs.getInt(1));
 			}
 		} catch (SQLException exception) {
-			throw (exception);
+			try{
+				 if(connection!=null) {
+		            connection.rollback();
+				 }
+				 throw exception;
+		      }catch(SQLException exception2){
+		         throw exception;
+		      }
 		} finally {
 			preparedStatement.close();
 			connection.close();
@@ -103,6 +118,7 @@ public class StaffDAOImpl implements StaffDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = DBUtilis.getInstance().getConnection();
+			connection.setAutoCommit(false);
 			String query = "INSERT INTO STAFF_MEMBERS (STAFF_NAME, USER_NAME, PASS, PHONENO, ADDRESS, DESIGNATION) VALUES (?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, staffMember.getName());
@@ -112,8 +128,16 @@ public class StaffDAOImpl implements StaffDAO {
 			preparedStatement.setString(5, staffMember.getAddress());
 			preparedStatement.setString(6, staffMember.getDesignation());
 			preparedStatement.executeUpdate();
+			connection.commit();
 		} catch (SQLException exception) {
-			throw (exception);
+			try{
+				 if(connection!=null) {
+		            connection.rollback();
+				 }
+				 throw exception;
+		      }catch(SQLException exception2){
+		         throw exception;
+		      }
 		} finally {
 			preparedStatement.close();
 			connection.close();
@@ -127,14 +151,13 @@ public class StaffDAOImpl implements StaffDAO {
 		StaffMember staffMember = null;
 
 		try {
-
 			connection = DBUtilis.getInstance().getConnection();
-
+			connection.setAutoCommit(false);
 			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, staffID);
 			ResultSet resultSet = preparedStatement.executeQuery();
-
+			connection.commit();
 			if (resultSet.next()) {
 				staffMember = new StaffMember();
 				staffMember.setStaffID(resultSet.getInt(1));
@@ -145,12 +168,17 @@ public class StaffDAOImpl implements StaffDAO {
 				staffMember.setDesignation(resultSet.getString(7));
 			}
 		} catch (SQLException exception) {
-			throw (exception);
+			try{
+				 if(connection!=null) {
+		            connection.rollback();
+				 }
+				 throw exception;
+		      }catch(SQLException exception2){
+		         throw exception;
+		      }
 		} finally {
-
 			preparedStatement.close();
 			connection.close();
-
 		}
 		return staffMember;
 	}
@@ -168,19 +196,24 @@ public class StaffDAOImpl implements StaffDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = DBUtilis.getInstance().getConnection();
+			connection.setAutoCommit(false);
 			String query = "delete from STAFF_MEMBERS where STAFF_ID=?";
-
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, staffID);
 			preparedStatement.executeUpdate();
+			connection.commit();
 		} catch (SQLException exception) {
-			throw (exception);
+			try{
+				 if(connection!=null) {
+		            connection.rollback();
+				 }
+				 throw exception;
+		      }catch(SQLException exception2){
+		         throw exception;
+		      }
 		} finally {
-
 			preparedStatement.close();
-
 			connection.close();
-
 		}
 		return staffMemberDeleted;
 	}

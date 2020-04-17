@@ -9,13 +9,12 @@ public class DBUtilis {
 
 	private static DBUtilis instance;
 	private Connection connection;
-	
-	
-	
-	private DBUtilis(){
+
+	private DBUtilis() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/gagKxXbdhO", "gagKxXbdhO", "QWxMivwD9p");
+			connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/gagKxXbdhO", "gagKxXbdhO",
+					"QWxMivwD9p");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -24,21 +23,17 @@ public class DBUtilis {
 	}
 
 	public Connection getConnection() {
-		
-
 		return connection;
-
 	}
-	
-	public static DBUtilis getInstance() throws SQLException {
-        if (instance == null) {
-            instance = new DBUtilis();
-        } else if (instance.getConnection().isClosed()) {
-            instance = new DBUtilis();
-        }
 
-        return instance;
-    }
+	public static DBUtilis getInstance() throws SQLException {
+		if (instance == null) {
+			instance = new DBUtilis();
+		} else if (instance.getConnection().isClosed()) {
+			instance = new DBUtilis();
+		}
+		return instance;
+	}
 
 //	public static void closeConnection(Connection con) {
 //		if (con != null) {
@@ -59,5 +54,5 @@ public class DBUtilis {
 //			}
 //		}
 //	}
-	
+
 }
