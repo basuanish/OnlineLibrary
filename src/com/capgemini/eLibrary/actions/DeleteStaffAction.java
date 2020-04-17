@@ -33,7 +33,7 @@ public class DeleteStaffAction extends Action {
         }
         catch (Exception exception)
         {
-        	session.setAttribute("errorMsg", exception.getMessage());
+        	request.setAttribute("errorMsg", exception.getMessage());
         	return mapping.findForward("deletion failed");
         }
     }

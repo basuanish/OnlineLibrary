@@ -23,25 +23,24 @@ public class AddBooksAction extends Action {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+
 		HttpSession ses = request.getSession(true);
-		
+
 		AddBooksForm addBooksForm = (AddBooksForm) form;
-		
-        String bookname = addBooksForm.getBookname();
-        String author = addBooksForm.getAuthor();
-       
-        Book book = new Book(bookname,author);
-        BooksDAO booksDAO = new BooksDAOImpl();
-        try {
-        booksDAO.addBooks(book);
-       
-        ses.setAttribute("bookname", bookname);
-        ses.setAttribute("author", author);
-        return mapping.findForward("addBooksSucces");
-        }
-       catch(SQLException e) {
-    	   return mapping.findForward("addBooksError");
-       }
+
+		String bookname = addBooksForm.getBookname();
+		String author = addBooksForm.getAuthor();
+
+		Book book = new Book(bookname, author);
+		BooksDAO booksDAO = new BooksDAOImpl();
+		try {
+			booksDAO.addBooks(book);
+
+			ses.setAttribute("bookname", bookname);
+			ses.setAttribute("author", author);
+			return mapping.findForward("addBooksSucces");
+		} catch (SQLException e) {
+			return mapping.findForward("addBooksError");
+		}
 	}
-	}
+}
