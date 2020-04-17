@@ -1,41 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-
-<html:html>
+<%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
-<title>Login Page</title>
+<meta charset="ISO-8859-1">
+<link href="styles.css" rel="stylesheet" type="text/css" />
+<title>Delete Books</title>
 </head>
 <body>
+<body>
+	<%@ include file="header.jsp"%>
 
-<div style="color:red">
-    <html:errors />
-    </div>
-<div id="templatemo_content">
-		<div id="content-box">
+
 
 			<%
-				out.print("<h1><font color=blue>DELETE BOOKS</h1>");
+				out.print("<h1><font color=blue>Delete Books</h1>");
 			%>
+
 			<html:form action="/deleteBooks">
-				<table height="230" align="center" cellspacing="10" cellpadding="8">
-					<tr>
-						<td>Staff ID :</td>
-						<td><html:text name="DeleteBooksForm" property="bookId" /></td>
-					</tr>
+				<table width="300" height="250" cellspacing="5" cellpadding="3"
+					align="center">
+
 					
 					<tr>
-						<td></td>
-						<td><html:submit value="deleteBooks" /> <html:reset
-							value="clear"/></td>
+						<td>BOOK ID:</td>
+						<td><html:text name="DeleteBooksForm" property="bookId" /></td>
 					</tr>
+
+					<tr>
+						<td></td>
+						<td><html:submit value="Submit" /> <INPUT TYPE=RESET
+							VALUE="CLEAR"></td>
+					</tr>
+					<%
+						if (request.getAttribute("exception") != null) {
+								out.print("<div>");
+								out.print("<font color='red'><font size='4'>" + request.getAttribute("exception") + "");
+
+								out.print("</div>");
+							}
+					%>
 				</table>
 			</html:form>
-		</div>
-		</div>
+			<div style="color: red">
+				<html:errors />
+			</div>
+		
 </body>
-</html:html>
+</html>

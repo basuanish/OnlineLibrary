@@ -7,25 +7,33 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-public class DeleteBooksForm extends ActionForm {
+public class DeleteBooksForm extends ActionForm{
 	
-	private int bookId;
-
-	@Override
+	private static final long serialVersionUID = 4234794995282881014L;
+	private String bookId;
+	
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-		ActionErrors actionErrors = new ActionErrors();
-		if (bookId < 1)
-			actionErrors.add("bookId",new ActionMessage("error.bookId.invalid"));
-		return actionErrors;
-	}
+		ActionErrors errors = new ActionErrors();
+		
+		if (bookId == null || bookId.length() < 1) {
+			errors.add("bookId", new ActionMessage("error.bookId.required"));
+		}
+		String regex = "\\d+";
+			
+		if(!bookId.matches(regex)) {
+			errors.add("bookId", new ActionMessage("error.bookId.number"));
+		}
+	return errors;
 
-	public int getBookId() {
+	
+}
+
+	public String getBookId() {
 		return bookId;
 	}
 
-	public void setBookId(int bookId) {
+	public void setBookId(String bookId) {
 		this.bookId = bookId;
 	}
 
-	
 }

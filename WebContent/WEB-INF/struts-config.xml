@@ -19,6 +19,9 @@
         </form-bean>
         <form-bean name="AddBooksForm" type="com.capgemini.eLibrary.forms.AddBooksForm">
         </form-bean>
+         <form-bean name="DeleteBooksForm" type="com.capgemini.eLibrary.forms.DeleteBooksForm">
+        </form-bean>
+        
         <form-bean name="MemberLoginForm" type="com.capgemini.eLibrary.forms.MemberLoginForm">
         </form-bean>
         <form-bean name="SearchBooksForm" type="com.capgemini.eLibrary.forms.SearchBooksForm">
