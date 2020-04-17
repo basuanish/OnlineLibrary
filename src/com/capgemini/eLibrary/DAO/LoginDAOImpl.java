@@ -9,7 +9,7 @@ import com.capgemini.eLibrary.exceptions.InvalidUserException;
 import com.capgemini.eLibrary.forms.LoginForm;
 import com.capgemini.eLibrary.utils.DBUtilis;
 
-public class LoginDAOImpl implements LoginDAO {
+public class LoginDAOImpl implements LoginDAO{
 
 	@Override
 	public boolean checkLogin(LoginForm loginForm) throws SQLException, InvalidUserException {

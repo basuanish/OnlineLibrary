@@ -16,9 +16,10 @@
                     <li><a href="login.jsp">Administrator</a></li>
                     <li><a href="memberLogin.jsp">Library Member</a></li>
                     <li><a href="searchBooks.jsp">Book Details</a></li>
-                  
+                  	
                 </ul>    	
      
    
 </body>
+<script src='script.js'></script>
 </html>

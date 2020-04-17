@@ -25,7 +25,7 @@
 
 					<%
 						if (request.getAttribute("exception") != null) {
-								out.print("<div>");
+								out.print("<div align='center'>");
 								out.print("<font color='blue'><font size='4'>" + request.getAttribute("exception") + "");
 
 								out.print("</div>");
@@ -43,7 +43,7 @@
 					</tr>
 				</table>
 			</html:form>
-			<div style="color: red">
+			<div style="color: red" align="center">
 				<html:errors />
 			</div>
 		
