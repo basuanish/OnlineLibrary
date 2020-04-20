@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -13,10 +14,14 @@ import org.apache.struts.action.ActionMapping;
 
 import com.capgemini.eLibrary.DAO.BooksDAO;
 import com.capgemini.eLibrary.DAO.BooksDAOImpl;
+import com.capgemini.eLibrary.constants.MessageConstant;
 import com.capgemini.eLibrary.dto.Book;
 import com.capgemini.eLibrary.forms.SearchBooksForm;
 
 public class SearchBooksAction extends Action {
+
+	static final Logger LOGGER = Logger.getLogger(SearchBooksAction.class);
+
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -30,15 +35,19 @@ public class SearchBooksAction extends Action {
 		List<Book> books;
 		try {
 			books = booksDAO.findByTitleOrAuthor(searchBook);
-			if(books.size()==0)
-				throw new Exception("No books found with the given criteria!!!");
-			for(Book b:books)
-				System.out.println(b);
-			session.setAttribute("books", books);
-			return mapping.findForward("list display successful");
+			if (books.size() == 0) {
+				LOGGER.error(MessageConstant.IN_SEARCH_BOOKS_ACTION + MessageConstant.NO_BOOKS_FOUND);
+				throw new Exception(MessageConstant.NO_BOOKS_FOUND);
+			}
+			LOGGER.info(MessageConstant.IN_SEARCH_BOOKS_ACTION+"\n");
+			for (Book b : books)
+				LOGGER.info(b+"\n");
+			session.setAttribute(MessageConstant.BOOKS_ATTRIBUTE, books);
+			return mapping.findForward(MessageConstant.LIST_DISPLAY_SUCCESSFUL);
 		} catch (Exception exception) {
-			request.setAttribute("errorMsg", exception.getMessage());
-			return mapping.findForward("list display failed");
+			LOGGER.error(MessageConstant.IN_SEARCH_BOOKS_ACTION + exception.getMessage());
+			request.setAttribute(MessageConstant.ERROR_MSG_ATTRIBUTE, exception.getMessage());
+			return mapping.findForward(MessageConstant.LIST_DISPLAY_FAILED);
 		}
 	}
 }

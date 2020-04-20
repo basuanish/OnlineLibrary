@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.capgemini.eLibrary.constants.MessageConstant;
 import com.capgemini.eLibrary.dto.StaffMember;
 import com.capgemini.eLibrary.forms.CreateStaffForm;
 import com.capgemini.eLibrary.services.StaffService;
@@ -32,21 +33,21 @@ public class CreateStaffAction extends Action{
 		System.out.println(newStaff.getUsername());
         try {
 	        if(staffService.checkUsernameForStaff(newStaff))
-	        	throw new Exception("Username already exists!!!");
+	        	throw new Exception(MessageConstant.USERNAME_EXISTS);
         }catch(Exception exception) {
         	LOGGER.error(exception.getMessage());
-        	request.setAttribute("errorMsg", exception.getMessage());
-        	return mapping.findForward("could not register");
+        	request.setAttribute(MessageConstant.ERROR_MSG_ATTRIBUTE, exception.getMessage());
+        	return mapping.findForward(MessageConstant.REGISTRATION_FAILURE);
         }
         
         newStaff.setPhoneNo(createStaffForm.getPhoneNo());
         try {
 	        if(staffService.checkPhoneNoForStaff(newStaff))
-	        	throw new Exception("PhoneNo already exists!!!");
+	        	throw new Exception(MessageConstant.PHONENO_EXISTS);
         }catch(Exception exception) {
         	LOGGER.error(exception.getMessage());
-        	request.setAttribute("errorMsg", exception.getMessage());
-        	return mapping.findForward("could not register");
+        	request.setAttribute(MessageConstant.ERROR_MSG_ATTRIBUTE, exception.getMessage());
+        	return mapping.findForward(MessageConstant.REGISTRATION_FAILURE);
         }
         
         newStaff.setPassword(createStaffForm.getPassword());
@@ -56,13 +57,13 @@ public class CreateStaffAction extends Action{
         System.out.println(newStaff);
         try {
         	newStaff = staffService.createStaff(newStaff);
-        	session.setAttribute("staffMember", newStaff);
-        	LOGGER.info("new staff member created");
-        	return mapping.findForward("registered");
+        	session.setAttribute(MessageConstant.STAFF_MEMBER_ATTRIBUTE, newStaff);
+        	LOGGER.info(MessageConstant.IN_CREATE_STAFF_ACTION + MessageConstant.NEW_STAFF_MEMBER_CREATED);
+        	return mapping.findForward(MessageConstant.REGISTRATION_SUCCESS);
         }catch(Exception exception) {
         	LOGGER.error(exception.getMessage());
-        	request.setAttribute("errorMsg", exception.getMessage());
-        	return mapping.findForward("could not register");
+        	request.setAttribute(MessageConstant.ERROR_MSG_ATTRIBUTE, exception.getMessage());
+        	return mapping.findForward(MessageConstant.REGISTRATION_FAILURE);
         }
 	}
 }

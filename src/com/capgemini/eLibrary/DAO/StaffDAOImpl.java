@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.capgemini.eLibrary.constants.MessageConstant;
+import com.capgemini.eLibrary.constants.QueryConstant;
 import com.capgemini.eLibrary.dto.StaffMember;
 import com.capgemini.eLibrary.utils.DBUtilis;
 
@@ -21,7 +23,7 @@ public class StaffDAOImpl implements StaffDAO {
 		boolean staffExists = false;
 		try {
 			connection = DBUtilis.getInstance().getConnection();
-			String query = "select * from STAFF_MEMBERS where USER_NAME=?";
+			String query = QueryConstant.FIND_STAFF_BY_USERNAME;
 			preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setString(1, username);
@@ -30,13 +32,13 @@ public class StaffDAOImpl implements StaffDAO {
 				staffExists = true;
 			}
 		} catch (SQLException exception) {
-			LOGGER.error("In DAO layer, " + exception.getMessage());
+			LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 			throw exception;
 		} finally {
 			preparedStatement.close();
 			connection.close();
 		}
-		LOGGER.info("In DAO layer, staff with given username exists ? "+staffExists);
+		LOGGER.info(MessageConstant.IN_DAO_LAYER + MessageConstant.EXISTS_BY_USERNAME_OR_NOT + staffExists);
 		return staffExists;
 	}
 
@@ -48,7 +50,7 @@ public class StaffDAOImpl implements StaffDAO {
 
 		try {
 			connection = DBUtilis.getInstance().getConnection();
-			String query = "select * from STAFF_MEMBERS where PHONENO=?";
+			String query = QueryConstant.FIND_STAFF_BY_PHONENO;
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, phoneNo);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -56,13 +58,13 @@ public class StaffDAOImpl implements StaffDAO {
 				staffExists = true;
 			}
 		} catch (SQLException exception) {
-			LOGGER.error("In DAO layer, " + exception.getMessage());
+			LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 			throw exception;
 		} finally {
 			preparedStatement.close();
 			connection.close();
 		}
-		LOGGER.info("In DAO layer, staff with given phoneNo exists ? "+staffExists);
+		LOGGER.info(MessageConstant.IN_DAO_LAYER + MessageConstant.EXISTS_BY_PHONENO_OR_NOT + staffExists);
 		return staffExists;
 	}
 
@@ -78,7 +80,7 @@ public class StaffDAOImpl implements StaffDAO {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = DBUtilis.getInstance().getConnection();
-			String query = "select * from STAFF_MEMBERS where USER_NAME=?";
+			String query = QueryConstant.FIND_STAFF_BY_USERNAME;
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, staffMember.getUsername());
 			ResultSet rs = preparedStatement.executeQuery();
@@ -87,13 +89,13 @@ public class StaffDAOImpl implements StaffDAO {
 				staffMember.setStaffID(rs.getInt(1));
 			}
 		} catch (SQLException exception) {
-			LOGGER.error("In DAO layer, " + exception.getMessage());
+			LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 			throw exception;
 		} finally {
 			preparedStatement.close();
 			connection.close();
 		}
-		LOGGER.info("In DAO layer, new staff details : "+staffMember);
+		LOGGER.info(MessageConstant.IN_DAO_LAYER + MessageConstant.NEW_STAFF_DETAILS + staffMember);
 		return staffMember;
 	}
 
@@ -103,7 +105,7 @@ public class StaffDAOImpl implements StaffDAO {
 		try {
 			connection = DBUtilis.getInstance().getConnection();
 			connection.setAutoCommit(false);
-			String query = "INSERT INTO STAFF_MEMBERS (STAFF_NAME, USER_NAME, PASS, PHONENO, ADDRESS, DESIGNATION) VALUES (?,?,?,?,?,?)";
+			String query = QueryConstant.ADD_NEW_STAFF;
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, staffMember.getName());
 			preparedStatement.setString(2, staffMember.getUsername());
@@ -118,10 +120,10 @@ public class StaffDAOImpl implements StaffDAO {
 				if (connection != null) {
 					connection.rollback();
 				}
-				LOGGER.error("In DAO layer, " + exception.getMessage());
+				LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 				throw exception;
 			} catch (SQLException exception2) {
-				LOGGER.error("In DAO layer, " + exception.getMessage());
+				LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 				throw exception;
 			}
 		} finally {
@@ -138,7 +140,7 @@ public class StaffDAOImpl implements StaffDAO {
 
 		try {
 			connection = DBUtilis.getInstance().getConnection();
-			String query = "select * from STAFF_MEMBERS where STAFF_ID=?";
+			String query = QueryConstant.FIND_STAFF_BY_ID;
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, staffID);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -152,13 +154,13 @@ public class StaffDAOImpl implements StaffDAO {
 				staffMember.setDesignation(resultSet.getString(7));
 			}
 		} catch (SQLException exception) {
-			LOGGER.error("In DAO layer, " + exception.getMessage());
+			LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 			throw exception;
 		} finally {
 			preparedStatement.close();
 			connection.close();
 		}
-		LOGGER.info("In DAO layer, staff details found: "+staffMember);
+		LOGGER.info(MessageConstant.IN_DAO_LAYER + MessageConstant.FOUND_STAFF_DETAILS + staffMember);
 		return staffMember;
 	}
 
@@ -176,7 +178,7 @@ public class StaffDAOImpl implements StaffDAO {
 		try {
 			connection = DBUtilis.getInstance().getConnection();
 			connection.setAutoCommit(false);
-			String query = "delete from STAFF_MEMBERS where STAFF_ID=?";
+			String query = QueryConstant.DELETE_STAFF_BY_ID;
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, staffID);
 			preparedStatement.executeUpdate();
@@ -186,17 +188,17 @@ public class StaffDAOImpl implements StaffDAO {
 				if (connection != null) {
 					connection.rollback();
 				}
-				LOGGER.error("In DAO layer, " + exception.getMessage());
+				LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 				throw exception;
 			} catch (SQLException exception2) {
-				LOGGER.error("In DAO layer, " + exception.getMessage());
+				LOGGER.error(MessageConstant.IN_DAO_LAYER + exception.getMessage());
 				throw exception;
 			}
 		} finally {
 			preparedStatement.close();
 			connection.close();
 		}
-		LOGGER.info("In DAO layer, deleted staff details : "+staffMemberDeleted);
+		LOGGER.info(MessageConstant.IN_DAO_LAYER + MessageConstant.DELETED_STAFF_DETAILS + staffMemberDeleted);
 		return staffMemberDeleted;
 	}
 }
